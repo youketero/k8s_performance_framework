@@ -19,7 +19,7 @@ pipeline {
 		stage('Recreate namespace') {
             steps {
                 script {
-                    sh 'kubectl create namespace ${params.NAMESPACE} --dry-run -o yaml | kubectl apply -f -'
+                    sh 'kubectl create ns ${params.NAMESPACE} || true'
                     sh 'kubectl get ns ${params.NAMESPACE}'
                 }
             }
