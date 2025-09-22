@@ -1,0 +1,35 @@
+kubectl get pods -n performance
+kubectl get pods -o wide
+kubectl get deployments
+kubectl logs jenkins-6586684789-b65d9 -n performance
+kubectl exec -it jenkins-6586684789-b65d9 -n performance -- bin/bash
+kubectl exec -it pod -- env
+kubectl get ns 
+kubectl describe pod pod_name
+kubectl get svc
+kubectl apply -f deployment.yaml
+kubectl delete -f deployment.yaml
+
+
+Що треба зробити
+
+NO NEED 1) Додати джобу з додавання дашбордів або функцію. Непотрібно, занадто запарно
+DONE 2) Більш гнучке налаштування джиметр джоби з запуску тестів 
+2.1) Додавання розділення тредів
+2.2) Додавання мультітредінг управління
+DONE 4) Додавання сервісу fastapi аналогічний fakestore API
+DONE 3) Додавання metricbeat на джиметр
+6) Додавання гатлінгу
+	a) Додавання логстеш пайплайнів
+	б) Додавання дашбордів для кібани
+	в) Додавання джоб в Jenkins 
+7) Додавання k6
+	a) Додавання логстеш пайплайнів
+	б) Додавання дашбордів для кібани
+	в) Додавання джоб в Jenkins 
+8) Додавання locust
+	a) Додавання логстеш пайплайнів
+	б) Додавання дашбордів для кібани
+	в) Додавання джоб в Jenkins 
+
+5) Додавання графани та інфлакса як альтернативи для джиметра
