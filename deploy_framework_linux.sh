@@ -12,17 +12,11 @@ kubectl create -f https://download.elastic.co/downloads/eck/3.1.0/crds.yaml
 kubectl apply -f https://download.elastic.co/downloads/eck/3.1.0/operator.yaml
 kubectl get -n elastic-system pods
 kubectl apply -f elasticsearch.yaml
-kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n performance --timeout=180s
 kubectl apply -f elasticsearch.yaml
-kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n performance --timeout=180s
 kubectl apply -f kibana.yaml
-kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n performance --timeout=180s
 kubectl apply -f logstash.yaml
-kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n performance --timeout=180s
 kubectl apply -f filebeat.yaml
-kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n performance --timeout=180s
 kubectl apply -f metricbeat.yaml
-kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n performance --timeout=180s
 echo "✅ ECK pod's is running"
 #--------------Deploying jmeter cluster----------
 echo "Starting deploying of jmeter cluster" 

@@ -27,7 +27,7 @@ jobs:
           [name: 'deploy_jmeter_cluster', path: 'jenkins/jobs/deploy_jmeter_cluster.Jenkinsfile'],
           [name: 'stop_jmeter_cluster', path: 'jenkins/jobs/stop_jmeter_cluster.Jenkinsfile'],
           [name: 'start_jmeter_test', path: 'jenkins/jobs/start_jmeter_test.Jenkinsfile'],
-          [name: 'stop_jmeter_test', path: 'jenkins/jobs/stop_jmeter_test.Jenkinsfile']
+          [name: 'stop_jmeter_test', path: 'jenkins/jobs/stop_jmeter_test.Jenkinsfile'],
           [name: 'deploy_stop_fastapp', path: 'jenkins/jobs/deploy_stop_fastapp.Jenkinsfile']
       ]
       jobs.each { j ->
