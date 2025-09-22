@@ -23,7 +23,6 @@ pipeline {
         }
         stage('Recreating jmeter deployment') {
             steps {
-                dir('k8s_jmeter') {
                     echo 'Recreating pod set'
                     sh """
                         kubectl -n ${params.NAMESPACE} delete -f jmeter_m.yaml -f jmeter_s.yaml --ignore-not-found=true
@@ -39,7 +38,6 @@ pipeline {
                         kubectl -n ${params.NAMESPACE} wait deployment jmeter-slaves --for=condition=Available --timeout=2m
                         """
                     echo "✅ Slave pod is running:"
-                }
             }
         }
     }
