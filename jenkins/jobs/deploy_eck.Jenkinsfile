@@ -65,12 +65,10 @@ pipeline {
         stage('Deploying elasticsearch') {
             steps {
                 echo 'Deploying elasticsearch'
-                dir('k8s_jmeter') {
-                    sh 'kubectl apply -f elasticsearch.yaml'
-                    sleep 5
-                    sh 'kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n ${params.NAMESPACE} --timeout=180s'
-                    echo 'Deploying ended'
-                }
+                sh 'kubectl apply -f elasticsearch.yaml'
+                sleep 5
+                sh 'kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n ${params.NAMESPACE} --timeout=180s'
+                echo 'Deploying ended'
                 script {
                     def esPassword = sh(
                         script: "kubectl get secret elasticsearch-es-elastic-user -n ${params.NAMESPACE} -o go-template='{{.data.elastic | base64decode}}'",
@@ -95,10 +93,8 @@ pipeline {
             steps {
                 echo "echo"
                 echo 'Deploying logstash'
-                dir('k8s_jmeter') {
-                    sh 'kubectl apply -f logstash.yaml'
-                    sh 'kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n ${params.NAMESPACE} --timeout=180s'
-                }
+                sh 'kubectl apply -f logstash.yaml'
+                sh 'kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n ${params.NAMESPACE} --timeout=180s'
                 echo 'Deploying ended'
             }
         }
@@ -106,10 +102,8 @@ pipeline {
             steps {
                 echo "echo"
                 echo 'Deploying filebeat'
-                dir('k8s_jmeter') {
-                    sh 'kubectl apply -f filebeat.yaml'
-                    sh 'kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n ${params.NAMESPACE} --timeout=180s'
-                }
+                sh 'kubectl apply -f filebeat.yaml'
+                sh 'kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n ${params.NAMESPACE} --timeout=180s'
                 echo 'Deploying ended'
             }
         }
@@ -117,10 +111,8 @@ pipeline {
             steps {
                 echo "echo"
                 echo 'Deploying metricbeat'
-                dir('k8s_jmeter') {
-                    sh 'kubectl apply -f metricbeat.yaml'
-                    sh 'kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n ${params.NAMESPACE} --timeout=180s'
-                }
+                sh 'kubectl apply -f metricbeat.yaml'
+                sh 'kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n ${params.NAMESPACE} --timeout=180s'
                 echo 'Deploying ended'
             }
         }
