@@ -64,12 +64,12 @@ pipeline {
         }
         stage('Deploying elasticsearch') {
             steps {
-                echo 'Deploying elasticsearch'
-                sh 'kubectl apply -f elasticsearch.yaml'
-                sleep 5
-                sh 'kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n ${params.NAMESPACE} --timeout=180s'
-                echo 'Deploying ended'
                 script {
+					echo 'Deploying elasticsearch'
+					sh 'kubectl apply -f elasticsearch.yaml'
+					sleep 5
+					sh 'kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n ${params.NAMESPACE} --timeout=180s'
+					echo 'Deploying ended'
                     def esPassword = sh(
                         script: "kubectl get secret elasticsearch-es-elastic-user -n ${params.NAMESPACE} -o go-template='{{.data.elastic | base64decode}}'",
                         returnStdout: true
