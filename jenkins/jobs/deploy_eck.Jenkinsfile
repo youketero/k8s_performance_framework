@@ -82,10 +82,8 @@ pipeline {
             steps {
                 echo "echo"
                 echo 'Deploying kibana'
-                dir('k8s_jmeter') {
-                    sh 'kubectl apply -f kibana.yaml'
-                    sh 'kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n ${params.NAMESPACE} --timeout=180s'
-                }
+                sh 'kubectl apply -f kibana.yaml'
+                sh 'kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n ${params.NAMESPACE} --timeout=180s'
                 echo 'Deploying ended'
             }
         }
