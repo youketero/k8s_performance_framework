@@ -4,18 +4,43 @@ A framework for automating deployment and performance testing in Kubernetes clus
 
 📂 Project Structure
 
-| Folder / File |   Description |
-| ------------- |-------------|
-| Jenkinsfile CI/CD | pipeline for automated deployment and testing |
-| jenkins/      | Jenkins configuration files, including agents and pipeline setup      |
-| deploy_framework_linux(win).sh | deploy_framework_win.sh	Scripts for automated framework deployment on Linux 🐧 and Windows 🪟|
-| jmeter/ | JMeter configurations for load testing       |
-| fast_api/ | JMeter configurations for load testing     |
-| dashboards/ | Templates for deploying FastAPI applications |
-
-
-fast_api/	Templates for deploying FastAPI applications ⚡
-dashboards/	Kibana dashboards 📊 for monitoring
+```
+k8s_performance_framework/
+├─ dashboards/
+│  └─ kibana_objects_jmeter.ndjson
+├─ fast_api/
+│  ├─ app/
+│  │  └─ main.py
+│  ├─ Dockerfile
+│  └─ requirements.txt
+├─ jenkins/
+│  ├─ Dockerfile
+│  ├─ jenkins.yaml
+│  ├─ plugins.sh
+│  └─ jobs
+│     └─ Jenkins jobs(.Jenkinsfile)
+├─ jmeter/
+│  ├─ Dockerfile
+│  ├─ entrypoint.sh
+│  ├─ jmeter.sh
+│  ├─ scripts
+│  │  ├─ data
+│  │  └─ example scripts(.jmx)
+│  └─ plugins
+│     └─ lib
+├─ deploy_framework_linux.sh
+├─ deploy_framework_win.sh
+├─ elasticsearch.yaml
+├─ fastapp.yaml
+├─ filebeat.yaml
+├─ jenkins.yaml
+├─ jmeter_m.yaml
+├─ jmeter_s.yaml
+├─ logstash.yaml
+├─ metricbeat.yaml
+├─ namespace.yaml
+└─ README.md
+```
 
 ⚡ Quick Start
 
