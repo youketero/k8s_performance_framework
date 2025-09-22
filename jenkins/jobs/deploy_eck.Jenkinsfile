@@ -18,10 +18,8 @@ pipeline {
         }
 		stage('Recreate namespace') {
             steps {
-                script {
-                    sh 'kubectl create ns ${params.NAMESPACE} || true'
-                    sh 'kubectl get ns ${params.NAMESPACE}'
-                }
+                sh 'kubectl create ns ${params.NAMESPACE} || true'
+                sh 'kubectl get ns ${params.NAMESPACE}'
             }
         }
         stage('Cleanup old ECK operator') {
