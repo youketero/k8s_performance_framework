@@ -5,7 +5,7 @@ A framework for automating deployment and performance testing in Kubernetes clus
 📂 Project Structure
 
 | Folder / File |   Description |
-| ------------- |:-------------:|
+| ------------- |-------------|
 | Jenkinsfile CI/CD | pipeline for automated deployment and testing |
 | jenkins/      | Jenkins configuration files, including agents and pipeline setup      |
 | deploy_framework_linux(win).sh | deploy_framework_win.sh	Scripts for automated framework deployment on Linux 🐧 and Windows 🪟|
