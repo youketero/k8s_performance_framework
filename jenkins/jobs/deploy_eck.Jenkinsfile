@@ -6,14 +6,14 @@ pipeline {
     stages {
         stage('Check kubectl') {
             steps {
-                echo 'Checking kubectl'
-                sh 'kubectl get pods -n default'
+                echo "Checking kubectl"
+                sh "kubectl get pods -n default"
             }
         }
         stage('Checkout git') {
             steps {
-                echo 'Downloading git repository'
-                git branch: 'main', url: 'https://github.com/youketero/k8s_performance_framework.git'
+                echo "Downloading git repository"
+                git branch: "main", url: "https://github.com/youketero/k8s_performance_framework.git"
             }
         }
 		stage('Recreate namespace') {
@@ -25,7 +25,7 @@ pipeline {
         stage('Cleanup old ECK operator') {
             steps {
                 script {
-                    echo 'Checking if ECK operator exists...'
+                    echo "Checking if ECK operator exists..."
                     def exists = sh(script: "kubectl get ns | grep elastic-system || true", returnStdout: true).trim()
                     if (exists) {
                         echo "ECK operator detected, deleting..."
@@ -53,23 +53,23 @@ pipeline {
         }
         stage('Deploying ECK orkestrator') {
             steps {
-                echo 'deploying eck orcestrator' 
-                sh 'kubectl create -f https://download.elastic.co/downloads/eck/3.1.0/crds.yaml'
-                echo 'applying eck orkestrator'
-                sh 'kubectl apply -f https://download.elastic.co/downloads/eck/3.1.0/operator.yaml' 
-                echo 'applying ended waiting 5 seconds'
+                echo "deploying eck orcestrator"
+                sh "kubectl create -f https://download.elastic.co/downloads/eck/3.1.0/crds.yaml"
+                echo "applying eck orkestrator"
+                sh "kubectl apply -f https://download.elastic.co/downloads/eck/3.1.0/operator.yaml"
+                echo "applying ended waiting 5 seconds"
                 sleep 5
-                sh 'kubectl get -n elastic-system pods' 
+                sh "kubectl get -n elastic-system pods"
             }
         }
         stage('Deploying elasticsearch') {
             steps {
                 script {
-					echo 'Deploying elasticsearch'
-					sh 'kubectl apply -f elasticsearch.yaml'
+					echo "Deploying elasticsearch"
+					sh "kubectl apply -f elasticsearch.yaml"
 					sleep 5
-					sh 'kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n ${params.NAMESPACE} --timeout=180s'
-					echo 'Deploying ended'
+					sh "kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n ${params.NAMESPACE} --timeout=180s"
+					echo "Deploying ended"
                     def esPassword = sh(
                         script: "kubectl get secret elasticsearch-es-elastic-user -n ${params.NAMESPACE} -o go-template='{{.data.elastic | base64decode}}'",
                         returnStdout: true
@@ -81,37 +81,37 @@ pipeline {
         stage('Deploying kibana') {
             steps {
                 echo "echo"
-                echo 'Deploying kibana'
-                sh 'kubectl apply -f kibana.yaml'
-                sh 'kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n ${params.NAMESPACE} --timeout=180s'
-                echo 'Deploying ended'
+                echo "Deploying kibana"
+                sh "kubectl apply -f kibana.yaml"
+                sh "kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n ${params.NAMESPACE} --timeout=180s"
+                echo "Deploying ended"
             }
         }
          stage('Deploying logstash') {
             steps {
                 echo "echo"
-                echo 'Deploying logstash'
-                sh 'kubectl apply -f logstash.yaml'
-                sh 'kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n ${params.NAMESPACE} --timeout=180s'
-                echo 'Deploying ended'
+                echo "Deploying logstash"
+                sh "kubectl apply -f logstash.yaml"
+                sh "kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n ${params.NAMESPACE} --timeout=180s"
+                echo "Deploying ended"
             }
         }
         stage('Deploying filebeat') {
             steps {
                 echo "echo"
-                echo 'Deploying filebeat'
-                sh 'kubectl apply -f filebeat.yaml'
-                sh 'kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n ${params.NAMESPACE} --timeout=180s'
-                echo 'Deploying ended'
+                echo "Deploying filebeat"
+                sh "kubectl apply -f filebeat.yaml"
+                sh "kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n ${params.NAMESPACE} --timeout=180s"
+                echo "Deploying ended"
             }
         }
         stage('Deploying metricbeat') {
             steps {
                 echo "echo"
-                echo 'Deploying metricbeat'
-                sh 'kubectl apply -f metricbeat.yaml'
-                sh 'kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n ${params.NAMESPACE} --timeout=180s'
-                echo 'Deploying ended'
+                echo "Deploying metricbeat"
+                sh "kubectl apply -f metricbeat.yaml"
+                sh "kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n ${params.NAMESPACE} --timeout=180s"
+                echo "Deploying ended"
             }
         }
     }
