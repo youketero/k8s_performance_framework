@@ -49,17 +49,18 @@ Steps
 ```
 git clone https://github.com/youketero/k8s_performance_framework.git && cd k8s_performance_framework
 ```
-2. Setup Jenkins	Import the Jenkinsfile and configure parameters such as NAMESPACE 👷
-3. Deploy components	Use YAML files to deploy:
-- Elasticsearch 
-- Kibana 
-- Logstash 
-- Filebeat 
-- Metricbeat 
-- FastAPI 
-4. Run load tests	Configure JMeter and use templates from jmeter/ folder 🏋️‍♂️
-5. Visualize metrics	Import dashboards from dashboards/ into Kibana 📊
-
+2. Run deploy_framework_(win or linux).sh file
+```
+./deploy_framework_win.sh
+```
+3. Navigate to Jenkins. **http://localhost:30080**
+4. Choose **start_jmeter_test job**. 1 run will always fails. During 2 run with selected parameters 
+5. Open in browser Kibana address **localhost:32343** with credentials(user: elastic. Code below hot to get password) 📊
+```
+kubectl get secret elasticsearch-es-elastic-user -n performance -o go-template='{{.data.elastic | base64decode}}'
+```
+6. Import objects that located in dashboards folder. File name is **kibana_objects_jmeter.ndjson**. Stack Management -> Saved objects -> Import 
+7. Open imported dashboard and check metrics
 ⚙️ Configuration Parameters
 
 TBD
