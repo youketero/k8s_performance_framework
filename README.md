@@ -4,8 +4,8 @@ A framework for automating deployment and performance testing in Kubernetes clus
 
 <details>
 
-<summary>📂 Project Structure </summary>
-
+<summary> 📂 Project Structure </summary>
+  
 ```
 k8s_performance_framework/
 ├─ dashboards/
@@ -50,7 +50,11 @@ k8s_performance_framework/
 
 <summary>⚡ Quick Start</summary>
 
-Steps
+### Prerequisites  
+- Installed docker
+- Kubernetes cluster
+
+### Steps  
 1. Clone repository	
 ```
 git clone https://github.com/youketero/k8s_performance_framework.git && cd k8s_performance_framework
@@ -76,7 +80,7 @@ Stack Management -> Saved objects -> Import
 <details>
 
 <summary>⚙️ Services</summary>
-
+  
 | Service       | Link                    | Description                                                                   |   
 | :------------ | :--------------------   | :---------------------------------------------------------------------------  | 
 | Jenkins       | http://localhost:30080  | Service for automation of cluster process and test runs                       |
