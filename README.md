@@ -73,7 +73,9 @@ Stack Management -> Saved objects -> Import
 
 </details>
 
-⚙️ Services
+<details>
+
+<summary>⚙️ Services</summary>
 
 | Service       | Link                    | Description                                                                   |   
 | :------------ | :--------------------   | :---------------------------------------------------------------------------  | 
@@ -89,7 +91,7 @@ Stack Management -> Saved objects -> Import
 | Jmeter master | -                       | Controller node for distributed orchestratation of JMeter test execution      |
 | Jmeter slave  | -                       | Distributed Worker node  that receives instructions from the master node      |
 
-
+</details>
 
 ⚙️ Configuration Parameters
 
@@ -100,5 +102,3 @@ TBD
 TBD
 
 📄 License
-
-This project is licensed under the MIT License. See the LICENSE
