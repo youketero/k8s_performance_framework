@@ -2,7 +2,9 @@
 
 A framework for automating deployment and performance testing in Kubernetes clusters using Jenkins, JMeter, Elastic Stack, and FastAPI.
 
-📂 Project Structure
+<details>
+
+<summary>📂 Project Structure </summary>
 
 ```
 k8s_performance_framework/
@@ -41,6 +43,9 @@ k8s_performance_framework/
 ├─ namespace.yaml
 └─ README.md
 ```
+
+</details>
+
 <details>
 
 <summary>⚡ Quick Start</summary>
