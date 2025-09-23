@@ -41,8 +41,9 @@ k8s_performance_framework/
 ├─ namespace.yaml
 └─ README.md
 ```
+<details>
 
-⚡ Quick Start
+<summary>⚡ Quick Start</summary>
 
 Steps
 1. Clone repository	
@@ -64,6 +65,8 @@ kubectl get secret elasticsearch-es-elastic-user -n performance -o go-template='
 File name is **kibana_objects_jmeter.ndjson**  
 Stack Management -> Saved objects -> Import  
 7. Open imported dashboard and check metrics  
+
+</details>
 
 ⚙️ Services
 
