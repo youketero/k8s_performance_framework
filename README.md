@@ -72,7 +72,7 @@ kubectl get secret elasticsearch-es-elastic-user -n performance -o go-template='
 ```
 6. Import objects that located in dashboards folder.   
 File name is **kibana_objects_jmeter.ndjson**  
-Stack Management -> Saved objects -> Import  
+Navigate to Stack Management -> Saved objects -> Import  
 7. Open imported dashboard and check metrics  
 
 </details>
@@ -97,12 +97,18 @@ Stack Management -> Saved objects -> Import
 
 </details>
 
-⚙️ Configuration Parameters
+<details>
+
+<summary>🏃 How to Run Tests</summary>
+
+</details>
 
 TBD
 
-📝 Notes
+📝 Example of deploying commands
 
 TBD
+
+📝 Jenkins jobs description
 
 📄 License
