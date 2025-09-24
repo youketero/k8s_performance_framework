@@ -151,9 +151,13 @@ deploy_framework_linux.sh
 ```
 </details>
 
-🏗️ Framework architecture  
+<details>  
+
+<summary> 🏗️ Framework architecture</summary>  
 
 ![alt-текст](https://github.com/youketero/k8s_performance_framework/blob/main/img/arhitecture.svg "Arhitecture scheme")
+
+</details>  
 
 📝 Jenkins jobs description
 
