@@ -103,7 +103,6 @@ k8s_performance_framework/
 
 </details>
 
-TBD
 <details>  
 <summary>📝 Example of commands</summary>  
 Deploy service  
