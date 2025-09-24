@@ -1,16 +1,3 @@
-# Persistent volume cache for accessing logs for filebeat
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: jmeter-data-dir-pvc
-  namespace: performance
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 5Gi
----
 # Deployment for jmeter master node
 apiVersion: apps/v1
 kind: Deployment
@@ -42,8 +29,6 @@ spec:
         volumeMounts:
           - name: jmeter-logs
             mountPath: /jmeter
-          - name: jmeter-data-dir
-            mountPath: /report
         env:
         - name: MODE
           value: "MASTER"
@@ -80,7 +65,4 @@ spec:
         - name: jmeter-logs
           persistentVolumeClaim:
             claimName: jmeter-logs-pvc
-        - name: jmeter-data-dir
-          persistentVolumeClaim:
-            claimName: jmeter-data-dir-pvc
 

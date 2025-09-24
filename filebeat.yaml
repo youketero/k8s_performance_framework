@@ -40,14 +40,14 @@ spec:
         paths:
           - /jmeter/report*.csv
         fields:
-          type: test_log_csv
+          type: jmeter_csv
         fields_under_root: true
       - type: log
         enabled: true
         paths:
           - /jmeter/jmeter*.log
         fields:
-          type: test_log_jmeter
+          type: jmeter_log
         fields_under_root: true
       - type: log
         enabled: true
