@@ -104,7 +104,8 @@ k8s_performance_framework/
 </details>
 
 <details>  
-<summary>📝 Example of commands</summary>  
+<summary>📝 Example of commands</summary>
+   
 Deploy service  
 
 ```
@@ -150,7 +151,9 @@ deploy_framework_linux.sh
 ```
 </details>
 
-TBD
+🏗️ Framework architecture  
+
+![alt-текст](https://github.com/youketero/k8s_performance_framework/blob/main/img/arhitecture.svg "Arhitecture scheme")
 
 📝 Jenkins jobs description
 
