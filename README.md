@@ -107,6 +107,7 @@ TBD
 <details>  
 <summary>📝 Example of commands</summary>  
 Deploy service  
+
 ```
 #Deploy ECK operator  
 kubectl create -f https://download.elastic.co/downloads/eck/3.1.0/crds.yaml  
@@ -115,7 +116,9 @@ kubectl apply -f https://download.elastic.co/downloads/eck/3.1.0/operator.yaml
 kubectl apply -f elasticsearch.yaml  
 # Other options: kibana, logstash, filebeat, metribeat, fastapp, jmeter_s, jmeter_m, jenkins  
 ``` 
+
 Stop service  
+
 ```
 #Stop ECK operator  
 kubectl delete -f https://download.elastic.co/downloads/eck/3.1.0/operator.yaml  
@@ -131,11 +134,15 @@ kubectl delete crd stackconfigpolicies.stackconfigpolicy.k8s.elastic.co
 kubectl delete -f elasticsearch.yaml  
 # Other options: kibana, logstash, filebeat, metribeat, fastapp, jmeter_s, jmeter_m, jenkins  
 ``` 
+
 Get Elasticsearh password(for kibana service)  
+
 ```
 kubectl get secret elasticsearch-es-elastic-user -n performance -o go-template='{{.data.elastic | base64decode}}'
 ```
+
 Run sh script  
+
 ```
 # Run deploy script on win using powershell  
 ./deploy_framework_win.sh
