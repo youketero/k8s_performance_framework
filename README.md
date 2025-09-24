@@ -4,6 +4,37 @@ A framework for automating deployment and performance testing in Kubernetes clus
 
 <details>
 
+<summary>⚡ Quick Start</summary>
+
+### Prerequisites  
+- Installed docker
+- Kubernetes cluster
+
+### Steps  
+1. Clone repository	
+```
+git clone https://github.com/youketero/k8s_performance_framework.git && cd k8s_performance_framework
+```
+2. Run deploy_framework_(win or linux).sh file
+```
+./deploy_framework_win.sh
+```
+3. Navigate to Jenkins. **http://localhost:30080**  
+4. Choose **start_jmeter_test job**. 1 run will always fails. During 2 run with selected parameters   
+5. Open in browser Kibana address **http://localhost:32343** with credentials 📊  
+user: elastic. Code below hot to get password
+```
+kubectl get secret elasticsearch-es-elastic-user -n performance -o go-template='{{.data.elastic | base64decode}}'
+```
+6. Import objects that located in dashboards folder.   
+File name is **kibana_objects_jmeter.ndjson**  
+Navigate to Stack Management -> Saved objects -> Import  
+7. Open imported dashboard and check metrics  
+
+</details>
+
+<details>
+
 <summary> 📂 Project Structure </summary>
   
 ```
@@ -48,37 +79,6 @@ k8s_performance_framework/
 
 <details>
 
-<summary>⚡ Quick Start</summary>
-
-### Prerequisites  
-- Installed docker
-- Kubernetes cluster
-
-### Steps  
-1. Clone repository	
-```
-git clone https://github.com/youketero/k8s_performance_framework.git && cd k8s_performance_framework
-```
-2. Run deploy_framework_(win or linux).sh file
-```
-./deploy_framework_win.sh
-```
-3. Navigate to Jenkins. **http://localhost:30080**  
-4. Choose **start_jmeter_test job**. 1 run will always fails. During 2 run with selected parameters   
-5. Open in browser Kibana address **http://localhost:32343** with credentials 📊  
-user: elastic. Code below hot to get password
-```
-kubectl get secret elasticsearch-es-elastic-user -n performance -o go-template='{{.data.elastic | base64decode}}'
-```
-6. Import objects that located in dashboards folder.   
-File name is **kibana_objects_jmeter.ndjson**  
-Navigate to Stack Management -> Saved objects -> Import  
-7. Open imported dashboard and check metrics  
-
-</details>
-
-<details>
-
 <summary>⚙️ Services</summary>
   
 | Service       | Link                    | Description                                                                   |   
@@ -104,8 +104,45 @@ Navigate to Stack Management -> Saved objects -> Import
 </details>
 
 TBD
-
-📝 Example of deploying commands
+<details>  
+<summary>📝 Example of commands</summary>  
+Deploy service  
+```
+#Deploy ECK operator  
+kubectl create -f https://download.elastic.co/downloads/eck/3.1.0/crds.yaml  
+kubectl apply -f https://download.elastic.co/downloads/eck/3.1.0/operator.yaml  
+# Deploy elasticsearch service  
+kubectl apply -f elasticsearch.yaml  
+# Other options: kibana, logstash, filebeat, metribeat, fastapp, jmeter_s, jmeter_m, jenkins  
+``` 
+Stop service  
+```
+#Stop ECK operator  
+kubectl delete -f https://download.elastic.co/downloads/eck/3.1.0/operator.yaml  
+kubectl delete -f https://download.elastic.co/downloads/eck/3.1.0/crds.yaml  
+kubectl delete ns elastic-system  
+kubectl delete crd elasticsearches.elasticsearch.k8s.elastic.co  
+kubectl delete crd kibanas.kibana.k8s.elastic.co  
+kubectl delete crd beats.beat.k8s.elastic.co  
+kubectl delete crd agents.agent.k8s.elastic.co  
+kubectl delete crd enterprisesearches.enterprisesearch.k8s.elastic.co  
+kubectl delete crd stackconfigpolicies.stackconfigpolicy.k8s.elastic.co  
+# Stop elasticsearch service  
+kubectl delete -f elasticsearch.yaml  
+# Other options: kibana, logstash, filebeat, metribeat, fastapp, jmeter_s, jmeter_m, jenkins  
+``` 
+Get Elasticsearh password(for kibana service)  
+```
+kubectl get secret elasticsearch-es-elastic-user -n performance -o go-template='{{.data.elastic | base64decode}}'
+```
+Run sh script  
+```
+# Run deploy script on win using powershell  
+./deploy_framework_win.sh
+# Run deploy script on linux  
+deploy_framework_linux.sh
+```
+</details>
 
 TBD
 
