@@ -155,7 +155,7 @@ deploy_framework_linux.sh
 
 <summary> 🏗️ Framework architecture</summary>  
 
-![alt-текст](https://github.com/youketero/k8s_performance_framework/blob/main/img/arhitecture.svg "Arhitecture scheme")
+![alt-текст](https://github.com/youketero/k8s_performance_framework/blob/main/img/arhitecture_scheme.svg "Arhitecture scheme")
 
 </details>  
 
