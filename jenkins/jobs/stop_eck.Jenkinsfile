@@ -24,7 +24,7 @@ pipeline {
 						kubectl delete crd stackconfigpolicies.stackconfigpolicy.k8s.elastic.co --ignore-not-found=true
 						'''
 						echo "ECK operator removed. Stopping pipeline gracefully..."
-                    sh "kubectl delete -k ./eck"
+                    sh "kubectl delete -k ./eck --ignore-not-found=true"
                 }
             }
         }

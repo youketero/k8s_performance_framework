@@ -62,7 +62,7 @@ pipeline {
                 sh "kubectl get -n elastic-system pods"
             }
         }
-        stage('Deploying elasticsearch') {
+        stage('Deploying eck cluster') {
             steps {
                 script {
 					echo "Deploying elasticsearch"
