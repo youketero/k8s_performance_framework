@@ -1,0 +1,33 @@
+# Deployment Jenkins
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jenkins
+  namespace: performance
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jenkins
+  template:
+    metadata:
+      labels:
+        app: jenkins
+    spec:
+      serviceAccountName: jenkins
+      containers:
+        - name: jenkins
+          image: youketero/jenkins-agent:k8s
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: CASC_JENKINS_CONFIG
+              value: /usr/share/jenkins/ref/jenkins_casc.yaml
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: jenkins-home
+              mountPath: /var/jenkins_home
+      volumes:
+        - name: jenkins-home
+          persistentVolumeClaim:
+            claimName: jenkins-pvc

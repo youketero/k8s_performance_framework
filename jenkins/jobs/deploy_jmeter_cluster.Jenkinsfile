@@ -25,14 +25,13 @@ pipeline {
             steps {
                     echo 'Recreating pod set'
                     sh """
-                        kubectl -n ${params.NAMESPACE} delete -f jmeter_m.yaml -f jmeter_s.yaml --ignore-not-found=true
-                        kubectl -n ${params.NAMESPACE} apply -f jmeter_m.yaml
+                        kubectl delete -k ./jmeter --ignore-not-found=true
+                        kubectl apply -k ./jmeter --ignore-not-found=true
                         kubectl -n ${params.NAMESPACE} wait --for=condition=Ready pod -l jmeter_mode=master --timeout=120s
                         """
-                    echo "✅ Master pod is running:"
+                    echo "✅ Master and slaves pod's is running:"
                     sh """
-                        kubectl -n ${NAMESPACE} get pods -l jmeter_mode=master -o wide
-                        kubectl -n "${NAMESPACE}" apply -f jmeter_s.yaml
+                        kubectl -n ${params.NAMESPACE} get pods -l jmeter_mode=master -o wide
                         kubectl -n ${params.NAMESPACE} scale deployment jmeter-slaves --replicas=${params.SLAVESNUM}
                         echo "Waiting for all replicas to become Ready..."
                         kubectl -n ${params.NAMESPACE} wait deployment jmeter-slaves --for=condition=Available --timeout=2m
