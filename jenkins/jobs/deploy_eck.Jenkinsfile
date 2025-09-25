@@ -47,7 +47,7 @@ pipeline {
                         echo "No ECK operator found, skipping cleanup"
                     }
                     echo "Cleaning up old workloads (elasticsearch, kibana, logstash, filebeat)..."
-                    sleep 10
+                    sleep 5
                 }
             }
         }
@@ -66,7 +66,7 @@ pipeline {
             steps {
                 script {
 					echo "Deploying elasticsearch"
-					sh "kubectl apply -f elasticsearch.yaml"
+					sh "kubectl apply -k ./eck"
 					sleep 5
 					sh "kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n ${params.NAMESPACE} --timeout=180s"
 					echo "Deploying ended"
@@ -76,42 +76,6 @@ pipeline {
                     ).trim()
 					currentBuild.description = "#${env.BUILD_NUMBER} - Elastic user: elastic; ElasticPass: ${esPassword}" 
                 }
-            }
-        }
-        stage('Deploying kibana') {
-            steps {
-                echo "echo"
-                echo "Deploying kibana"
-                sh "kubectl apply -f kibana.yaml"
-                sh "kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n ${params.NAMESPACE} --timeout=180s"
-                echo "Deploying ended"
-            }
-        }
-         stage('Deploying logstash') {
-            steps {
-                echo "echo"
-                echo "Deploying logstash"
-                sh "kubectl apply -f logstash.yaml"
-                sh "kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n ${params.NAMESPACE} --timeout=180s"
-                echo "Deploying ended"
-            }
-        }
-        stage('Deploying filebeat') {
-            steps {
-                echo "echo"
-                echo "Deploying filebeat"
-                sh "kubectl apply -f filebeat.yaml"
-                sh "kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n ${params.NAMESPACE} --timeout=180s"
-                echo "Deploying ended"
-            }
-        }
-        stage('Deploying metricbeat') {
-            steps {
-                echo "echo"
-                echo "Deploying metricbeat"
-                sh "kubectl apply -f metricbeat.yaml"
-                sh "kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n ${params.NAMESPACE} --timeout=180s"
-                echo "Deploying ended"
             }
         }
     }

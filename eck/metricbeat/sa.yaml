@@ -1,0 +1,6 @@
+# ServiceAccount для Metricbeat
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: metricbeat
+  namespace: performance

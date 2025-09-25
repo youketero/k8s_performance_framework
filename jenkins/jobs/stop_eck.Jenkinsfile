@@ -1,7 +1,4 @@
-properties([[$class: 'RebuildSettings', autoRebuild: false, rebuildDisabled: false], 
-    parameters([string(defaultValue: 'eck-operator,elasticsearch,kibana,logstash,beat', description: 'Which service will be stopped. Values comma separated. Example: eck-operator,elasticsearch,kibana,logstash,beat', name: 'SERVICES', trim: true), 
-    string(defaultValue: 'performance', description: 'Select namespace from which services will be deleted', name: 'NAMESPACE', trim: true)])])
-
+properties([string(defaultValue: 'performance', description: 'Select namespace from which services will be deleted', name: 'NAMESPACE', trim: true)])
 
 pipeline {
     agent any
@@ -17,7 +14,6 @@ pipeline {
             steps {
                 script {
                     def items = params.SERVICES.tokenize(',')
-					if ("eck-operator" in items) {
 						echo "Deleting ECK operator and CRDs..."
 
 						sh '''
@@ -36,14 +32,9 @@ pipeline {
 
 						echo "ECK operator removed. Stopping pipeline gracefully..."
 						currentBuild.result = 'SUCCESS'
-						return
-					}
-					items.each{ i ->
-                        echo "deleting ${i}"
-                        sh "kubectl delete ${i} --all -n ${params.NAMESPACE} --ignore-not-found=true"
+                        sh "kubectl delete -k ./eck"
                     }
                 }
             }
         }
     }
-}

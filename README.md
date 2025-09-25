@@ -149,6 +149,15 @@ Run sh script
 # Run deploy script on linux  
 deploy_framework_linux.sh
 ```
+
+How to build own docker image for jenkins  
+
+```
+docker build -t jenkins_test:latest ./jenkins
+docker tag jenkins_test:latest <your_docker_user>/jenkins-agent:k8s
+docker push <your_docker_user>/jenkins-agent:k8s
+```
+
 </details>
 
 <details>  
