@@ -1,4 +1,4 @@
 #--------------Deploying jenkins-----------------
-echo "Creating namespace started"
+echo "Creating jenkins started"
 kubectl delete -k ./jenkins
-echo "✅ Jenkins pod created"
+echo "✅ Jenkins components up and running"

@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Deploy/stop fastapp') {
             steps {
-                sh "kubectl ${params.ACTION} -f fastapp.yaml"
+                sh "kubectl ${params.ACTION} -k ./fast_api"
             }
         }
     }

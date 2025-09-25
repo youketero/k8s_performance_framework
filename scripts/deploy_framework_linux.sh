@@ -28,5 +28,5 @@ kubectl -n performance wait deployment jmeter-slaves --for=condition=Available -
 echo "✅ Jmeter pod's is running"
 #--------------Deploying fastapp application-----
 echo "Starting deploying of fastapp application" 
-kubectl -n performance apply -f fastapp.yaml
+kubectl apply -f ./fast_api
 echo "✅ Fastapp pod is running"
