@@ -18,7 +18,7 @@ spec:
       - type: log
         enabled: true
         paths:
-          - /jmeter/jmeter*.log
+          - /jmeter/jmeter*.jtl
         fields:
           type: jmeter_log
         fields_under_root: true

@@ -158,6 +158,14 @@ docker tag jenkins_test:latest <your_docker_user>/jenkins-agent:k8s
 docker push <your_docker_user>/jenkins-agent:k8s
 ```
 
+How to build own docker image for jmeter  
+
+```
+docker build -t jmeter:latest ./jmeter
+docker tag jenkins_test:latest <your_docker_user>/jmeter:k8s
+docker push <your_docker_user>/jmeter:k8s
+```
+
 </details>
 
 <details>  
