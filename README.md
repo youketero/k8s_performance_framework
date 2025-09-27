@@ -39,40 +39,97 @@ Navigate to Stack Management -> Saved objects -> Import
   
 ```
 k8s_performance_framework/
-├─ dashboards/
-│  └─ kibana_objects_jmeter.ndjson
-├─ fast_api/
-│  ├─ app/
-│  │  └─ main.py
-│  ├─ Dockerfile
-│  └─ requirements.txt
-├─ jenkins/
-│  ├─ Dockerfile
-│  ├─ jenkins.yaml
-│  ├─ plugins.sh
-│  └─ jobs
-│     └─ Jenkins jobs(.Jenkinsfile)
-├─ jmeter/
-│  ├─ Dockerfile
-│  ├─ entrypoint.sh
-│  ├─ jmeter.sh
-│  ├─ scripts
-│  │  ├─ data
-│  │  └─ example scripts(.jmx)
-│  └─ plugins
-│     └─ lib
-├─ deploy_framework_linux.sh
-├─ deploy_framework_win.sh
-├─ elasticsearch.yaml
-├─ fastapp.yaml
-├─ filebeat.yaml
-├─ jenkins.yaml
-├─ jmeter_m.yaml
-├─ jmeter_s.yaml
-├─ logstash.yaml
-├─ metricbeat.yaml
-├─ namespace.yaml
-└─ README.md
+│   README.md
+│
+├───eck
+│   │   kustomization.yaml
+│   │
+│   ├───elasticsearch
+│   │       deployment.yaml
+│   │       sc.yaml
+│   │
+│   ├───filebeat
+│   │       ds.yaml
+│   │       fastapp-logs-pvc.yaml
+│   │       jmeter-logs-pvc.yaml
+│   │
+│   ├───kibana
+│   │   │   deployment.yaml
+│   │   │
+│   │   └───dashboards
+│   │           kibana_objects_jmeter.ndjson
+│   │
+│   ├───logstash
+│   │       deployment.yaml
+│   │
+│   └───metricbeat
+│           cr.yaml
+│           crb.yaml
+│           ds.yaml
+│           sa.yaml
+│
+├───fast_api
+│   │   deployment.yaml
+│   │   Dockerfile
+│   │   kustomization.yaml
+│   │   requirements.txt
+│   │   svc.yaml
+│   │
+│   └───app
+│           main.py
+│
+├───img
+│       arhitecture_scheme.svg
+│
+├───jenkins
+│   │   crb.yaml
+│   │   deployment.yaml
+│   │   Dockerfile
+│   │   jenkins_casc.yaml
+│   │   kustomization.yaml
+│   │   plugins.txt
+│   │   pvc.yaml
+│   │   sa.yaml
+│   │   svc.yaml
+│   │
+│   └───jobs
+│           deploy_eck.Jenkinsfile
+│           deploy_jmeter_cluster.Jenkinsfile
+│           deploy_stop_fastapp.Jenkinsfile
+│           start_jmeter_test.Jenkinsfile
+│           stop_eck.Jenkinsfile
+│           stop_jmeter_cluster.Jenkinsfile
+│           stop_jmeter_test.Jenkinsfile
+│
+├───jmeter
+│   │   Dockerfile
+│   │   kustomization.yaml
+│   │   master.yaml
+│   │   slave.yaml
+│   │   slave_svc.yaml
+│   │
+│   └───scripts
+│       │   Fastapp.jmx
+│       │   Google_basic.jmx
+│       │
+│       └───data
+│               data.csv
+│               data_nosplit.csv
+│
+├───namespaces
+│       performance_ns.yaml
+│
+└───scripts
+        deploy_eck.sh
+        deploy_fastapp.sh
+        deploy_framework_linux.sh
+        deploy_framework_win.sh
+        deploy_jenkins.sh
+        deploy_jmeter.sh
+        stop_eck.sh
+        stop_fastapp.sh
+        stop_jenkins.sh
+        stop_jmeter.sh
 ```
 
 </details>
@@ -176,6 +233,6 @@ docker push <your_docker_user>/jmeter:k8s
 
 </details>  
 
-📝 Jenkins jobs description
+🤖 Jenkins jobs description
 
 📄 License
