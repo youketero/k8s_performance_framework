@@ -32,10 +32,10 @@ spec:
         - containerPort: 4445
         resources:
           requests:
-            memory: "1024Mi"
+            memory: "1536Mi"
             cpu: "2048m"
           limits:
-            memory: "1024Mi"
+            memory: "2048Mi"
             cpu: "2048m"
         livenessProbe:
           exec:

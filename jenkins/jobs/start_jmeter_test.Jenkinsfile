@@ -74,7 +74,7 @@ def uploadCsvToPods(slavePods, namespace, jmeterDir, slaveNum) {
                         
                         sh "split --suffix-length=2 -d -l ${linesPerSplit} '${csv}' '${csv}.'"
                         def copyCommands = []
-                        for (int i = 0; i < 3; i++) {
+                        for (int i = 0; i < ${slaveNum}; i++) {
                             def j = String.format("%02d", i)
                             def splitFile = "${csv}.${j}"
                             def pod = slavePods[i]
@@ -90,7 +90,7 @@ def uploadCsvToPods(slavePods, namespace, jmeterDir, slaveNum) {
                     def csvFiles_no_split = csv_raw_split_nosplit ? csv_raw_split_nosplit.split("\n").findAll { it?.trim() } : []
                     if (csvFiles_no_split && csvFiles_no_split.size() > 0) {
                             csvFiles_no_split.each { csv ->
-                            for (int i = 0; i < 3; i++) {
+                            for (int i = 0; i < ${slaveNum}; i++) {
                                  def pod = slavePods[i]
                                 def csvFile = csv.split("/")[-1]
                                 sh(script: "kubectl -n ${namespace} cp -c jmslave '${csv}' ${pod}:${jmeterDir}/bin/${csvFile}", returnStdout: true).trim()
