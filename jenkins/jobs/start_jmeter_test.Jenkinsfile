@@ -1,7 +1,7 @@
 properties([[$class: 'RebuildSettings', autoRebuild: false, rebuildDisabled: false], 
     parameters([string(defaultValue: 'performance', description: 'Select namespace from which services will be deleted', name: 'NAMESPACE', trim: true),
     string(defaultValue: 'Google_basic.jmx', description: 'Select .jmx file that need to be executed', name: 'JMX_FILE', trim: true), 
-    string(defaultValue: '10', description: 'Select number of virtual threads', name: 'THREADS', trim: true),
+    string(defaultValue: '10', description: 'Select number of virtual threads. Selected number will be PER SLAVE  node', name: 'THREADS', trim: true),
     string(defaultValue: '10', description: 'Fill ramp up period in sec', name: 'RAMP_UP', trim: true),
     string(defaultValue: '120', description: 'Fill test duration in sec', name: 'DURATION', trim: true),
     string(defaultValue: 'TEST_DELAY:10', description: 'Add custom parameter in format param:value separated by comma' , name: 'CUSTOM_PARAMETERS', trim: true),
