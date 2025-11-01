@@ -236,8 +236,7 @@ docker push <your_docker_user>/jmeter:k8s
 <details>  
 
 <summary> 🤖 Jenkins jobs description </summary>
-
-
+   
 | Name | Description | Parameters | Parameters type | Parameters description | Parameters defaults | Stages | Stages description |
 | :--- | :---------- | :--------  | :-------------  |:---------------------  |:------------------  |:-----  |:------------------ |
 | deploy_eck |	Job for deploying elk stack(elasticsearch, kibana, logstash, filebeat) | NAMESPACE | String | namespace where will be added new nodes | performance | Declarative: Checkout SCM | Checkout repository where located Jenkinsfiles |
