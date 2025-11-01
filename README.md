@@ -254,8 +254,8 @@ docker push <your_docker_user>/jmeter:k8s
 | | | | | | | Deploy/stop fastapp | Deploying or stopping fastapi application |
 | start_jmeter_test | Job for starting jmeter test | NAMESPACE | String | namespace where will be added new nodes | performance | Declarative: Checkout SCM | Checkout repository where located Jenkinsfiles | 
 | | | JMX_FILE | String | Select .jmx file that need to be executed. Example path: \jmeter\scripts | Google_basic.jmx | Download Git Repository | Downloading needed repository where located .jmx file and data files(if exists). Also if data folder not empty will be added data files. Files without _nosplit in naming will be splitted through slave nodes equally |
-| | | THREADS | String | Select number of virtual threads. Selected number will be PER SLAVE node | 10 | Cleanup | Clean workspace folder on Jenkins pod |
-| | | RAMP_UP |	String | RAMP_UP | 10 | | |
+| | | THREADS | String | Select number of virtual threads. Selected number will be PER SLAVE node | 10 | Start jmeter test | Starting jmeter test with selected parameters |
+| | | RAMP_UP |	String | RAMP_UP | 10 | Cleanup | Clean workspace folder on Jenkins pod |
 | | | DURATION | String | Fill test duration in sec | 10 | | |
 | | | CUSTOM_PARAMETERS | String | Add custom parameter in format param:value separated by comma | TEST_DELAY:10 | | |		
 | stop_eck | Job that stopping elk stack | NAMESPACE | String | namespace where will be added new nodes | performance | Declarative: Checkout SCM | Checkout repository where located Jenkinsfiles | 
