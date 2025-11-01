@@ -268,5 +268,3 @@ docker push <your_docker_user>/jmeter:k8s
 | | | | | | | Stop Jmeter test | Stop jmeter test |  
   
 </details>  
-  
-📄 License
