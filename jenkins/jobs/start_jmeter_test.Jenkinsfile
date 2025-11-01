@@ -14,7 +14,7 @@ pipeline {
             steps {
                 git(
                     branch: 'main',
-                    url: 'https://github.com/youketero/k8s_performance_framework.git'
+                    url: 'https://github.com/youketero/jmeter_test.git'
                 )
             }
         }
