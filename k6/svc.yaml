@@ -1,0 +1,12 @@
+# Service for access to k6 from master to slave nodes
+apiVersion: v1
+kind: Service
+metadata:
+  name: k6
+  namespace: performance
+spec:
+  ports:
+    - port: 6565
+      targetPort: 6565
+  selector:
+    app: k6

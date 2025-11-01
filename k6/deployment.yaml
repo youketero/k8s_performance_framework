@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k6
+  namespace: performance
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: k6
+  template:
+    metadata:
+      labels:
+        app: k6
+    spec:
+      containers:
+        - name: k6
+          image: youketero/k6:k8s
+          args: ["run", "--out", "json=/mnt/results/result.json", "--vus", "0", "--duration", "1s", "/scripts/test.js", "--address", "0.0.0.0:6565"]
+          ports:
+            - containerPort: 6565
+          volumeMounts:
+            - name: k6-storage
+              mountPath: /mnt/results
+      volumes:
+        - name: k6-storage
+          persistentVolumeClaim:
+            claimName: k6-tests-pvc

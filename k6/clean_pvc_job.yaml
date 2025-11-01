@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: k6-clean-pvc
+spec:
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: clean
+          image: busybox
+          command: ["sh", "-c", "rm -rf /mnt/results/*"]
+          volumeMounts:
+            - name: k6-storage
+              mountPath: /mnt/results
+      volumes:
+        - name: k6-storage
+          persistentVolumeClaim:
+            claimName: k6-pvc

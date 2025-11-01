@@ -1,0 +1,12 @@
+# Volumes for storring test metrics and results for k6
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: k6-tests-pvc
+  namespace: performance
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
