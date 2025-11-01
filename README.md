@@ -233,7 +233,9 @@ docker push <your_docker_user>/jmeter:k8s
 
 </details>  
 
-🤖 Jenkins jobs description
+<details>  
+
+<summary> 🤖 Jenkins jobs description </summary>
   
 | Name | Description | Parameters | Parameters type | Parameters description | Parameters defaults | Stages | Stages description |
 | :--- | :---------- | :--------  | :-------------  |:---------------------  |:------------------  |:-----  |:------------------ |
@@ -265,5 +267,6 @@ docker push <your_docker_user>/jmeter:k8s
 | stop_jmeter_test | Job for stopping jmeter test | NAMESPACE | String | namespace where will be added new nodes | performance | Declarative: Checkout SCM | Checkout repository where located Jenkinsfiles |
 | | | | | | | Stop Jmeter test | Stop jmeter test |  
   
-
+</details>  
+  
 📄 License
