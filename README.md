@@ -15,9 +15,9 @@ A framework for automating deployment and performance testing in Kubernetes clus
 ```
 git clone https://github.com/youketero/k8s_performance_framework.git && cd k8s_performance_framework
 ```
-2. Run deploy_framework_(win or linux).sh file
+2. Run deploy_framework.sh file
 ```
-./deploy_framework_win.sh
+./deploy_framework.sh
 ```
 3. Navigate to Jenkins. **http://localhost:30080**  
 4. Choose **start_jmeter_test job**. 1 run will always fails. During 2 run with selected parameters   
@@ -27,7 +27,6 @@ user: elastic. Code below hot to get password
 kubectl get secret elasticsearch-es-elastic-user -n performance -o go-template='{{.data.elastic | base64decode}}'
 ```
 6. Import objects that located in dashboards folder.   
-File name is **kibana_objects_jmeter.ndjson**  
 Navigate to Stack Management -> Saved objects -> Import  
 7. Open imported dashboard and check metrics  
 
@@ -201,9 +200,7 @@ kubectl get secret elasticsearch-es-elastic-user -n performance -o go-template='
 Run sh script  
 
 ```
-# Run deploy script on win using powershell  
-./deploy_framework_win.sh
-# Run deploy script on linux  
+# Run deploy framework script
 deploy_framework_linux.sh
 ```
 
@@ -230,6 +227,18 @@ docker push <your_docker_user>/jmeter:k8s
 <summary> 🏗️ Framework architecture</summary>  
 
 ![alt-текст](https://github.com/youketero/k8s_performance_framework/blob/main/img/arhitecture_scheme.svg "Arhitecture scheme")
+
+</details>  
+
+<details>  
+
+</details>
+
+<details>  
+
+<summary> 🧩 Features </summary>  
+
+Add coverage by scripts 
 
 </details>  
 
