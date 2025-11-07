@@ -198,21 +198,31 @@ k8s_performance_framework/
 
 <summary>🏃 How to Run Tests</summary>
 
-###Quick setup using .sh scripts###
+### Quick setup using .sh scripts
 
-1) Deploy framework(option for jmeter)
+## Prerequisites  
+- Installed docker
+- Kubernetes cluster
+- On Windows installed WSL(Ubuntu latest for example). Also select in docker /settings/resourses/wsl integration/enable integration with selected linux distro
+
+1) Clone repository	
+```
+git clone https://github.com/youketero/k8s_performance_framework.git && cd k8s_performance_framework
+```
+
+2) Deploy framework(option for jmeter)
 
 ```
 chmod +x ./scripts/deploy_framework.sh
 ./scripts/deploy_framework.sh jmeter 
 ``` 
-2) Start the test
+3) Start the test
 
 ```
 chmod +x ./scripts/jmeter/start_jmeter_test.sh
-./scripts/jmeter/start_jmeter_test.sh
+./scripts/start_jmeter_test.sh --namespace performance --jmx Google_basic.jmx --threads 10 --ramp-up 10 --duration 120 --custom "TEST_DELAY:10"
 ``` 
-3) Navigate to kibana to check results
+4) Navigate to kibana to check results
 
    - Get elastic key(username elastic)
    ```
@@ -220,10 +230,35 @@ chmod +x ./scripts/jmeter/start_jmeter_test.sh
    ```
    -  Import objects that located in dashboards folder. Navigate to Stack Management -> Saved objects -> Import
    -  Open imported dashboard(Jmeter_dashboard) and check results
-     
+
 > [!NOTE]
 > Run from repository root folder
 
+### Quick setup using jenkins
+
+## Prerequisites  
+- Installed docker
+- Kubernetes cluster
+
+### Steps  
+1) Clone repository	
+```
+git clone https://github.com/youketero/k8s_performance_framework.git && cd k8s_performance_framework
+```
+2) Deploy jenkins node
+```
+kubectl apply -k ./jenkins
+```
+3) Navigate to Jenkins. **http://localhost:30080**  
+4) Choose **start_jmeter_test job**. 1 run will always fails. During 2 run with selected parameters   
+5) Open in browser Kibana address **http://localhost:32343** with credentials 📊  
+user: elastic. Code below hot to get password
+```
+kubectl get secret elasticsearch-es-elastic-user -n performance -o go-template='{{.data.elastic | base64decode}}'
+```
+6) Import objects that located in dashboards folder.   
+Navigate to Stack Management -> Saved objects -> Import  
+7) Open imported dashboard(Jmeter_dashboard) and check metrics  
 
 </details>
 
