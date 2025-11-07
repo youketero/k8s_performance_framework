@@ -252,26 +252,26 @@ Add coverage by scripts
 
 - Description Job for deploying elk stack(elasticsearch, kibana, logstash, filebeat)
 - Parameters 
-       *  NAMESPACE (type - String, default - performance) - namespace where will be added new nodes
+   -  NAMESPACE (type - String, default - performance) - namespace where will be added new nodes
 - Stages
-       *  Declarative: Checkout SCM - Checkout repository where located Jenkinsfiles
-       *  Check kubectl - Check that k8s exists
-       *  Checkout git - Download needed repository
-       *  Recreate namespace - Recreating namespace is not exists
-       *  Cleanup old ECK operator - Deleting ECK operator and elk stack if exists
-       *  Deploying ECK orkestrator - Deploying ECK orkestrator
+   -  Declarative: Checkout SCM - Checkout repository where located Jenkinsfiles
+   -  Check kubectl - Check that k8s exists
+   -  Checkout git - Download needed repository
+   -  Recreate namespace - Recreating namespace is not exists
+   -  Cleanup old ECK operator - Deleting ECK operator and elk stack if exists
+   -  Deploying ECK orkestrator - Deploying ECK orkestrator
 
 ### deploy_jmeter_cluster
 
 - Job for deploying jmeter cluster(master and slave nodes)
 - Parameters 
-       *  NAMESPACE (type - String, default - performance) - namespace where will be added new nodes
-       *  SLAVESNUM (type - String, default - 3) - namespace where will be added new nodes
+   -  NAMESPACE (type - String, default - performance) - namespace where will be added new nodes
+   -  SLAVESNUM (type - String, default - 3) - namespace where will be added new nodes
 - Stages
-       *  Declarative: Checkout SCM - Checkout repository where located Jenkinsfiles
-       *  Checkout git - Download needed repository
-       *  Check replica number - Checking that replica numbers is not higher that 10(default value. Added to prevent too large values)
-       *  Recreating jmeter deployment - Creating jmeter cluster with master and needed nodes
+   -  Declarative: Checkout SCM - Checkout repository where located Jenkinsfiles
+   -  Checkout git - Download needed repository
+   -  Check replica number - Checking that replica numbers is not higher that 10(default value. Added to prevent too large values)
+   -  Recreating jmeter deployment - Creating jmeter cluster with master and needed nodes
 
 ### deploy_stop_fastapp
 
@@ -288,37 +288,37 @@ Add coverage by scripts
 
 - Job for starting jmeter test
 - Parameters 
-       *  NAMESPACE (type - String, default - performance) - namespace where will be added new nodes
-       *  JMX_FILE (type - String, default - Google_basic.jmx) - Select .jmx file that need to be executed. Example path: \jmeter\scripts
-       *  THREADS (type - String, default - 10) - Select number of virtual threads. Selected number will be PER SLAVE node
-       *  RAMP_UP (type - String, default - 10) - ramping up time(time before load reached max threads num)
-       *  DURATION (type - String, default - 10) - test duration in sec 
-       *  CUSTOM_PARAMETERS (type - String, default - TEST_DELAY:10) - Add custom parameter in format param:value separated by comma
+   -  NAMESPACE (type - String, default - performance) - namespace where will be added new nodes
+   -  JMX_FILE (type - String, default - Google_basic.jmx) - Select .jmx file that need to be executed. Example path: \jmeter\scripts
+   -  THREADS (type - String, default - 10) - Select number of virtual threads. Selected number will be PER SLAVE node
+   -  RAMP_UP (type - String, default - 10) - ramping up time(time before load reached max threads num)
+   -  DURATION (type - String, default - 10) - test duration in sec 
+   -  CUSTOM_PARAMETERS (type - String, default - TEST_DELAY:10) - Add custom parameter in format param:value separated by comma
 - Stages
-       *  Declarative: Checkout SCM - Checkout repository where located Jenkinsfiles
-       *  Download Git Repository - Downloading needed repository where located .jmx file and data files(if exists). Also if data folder not empty will be added data files. Files without _nosplit in naming will be splitted through slave nodes equally
-       *  Start jmeter test - Starting jmeter test with selected parameters
-       *  Cleanup - Clean workspace folder on Jenkins pod
+   -  Declarative: Checkout SCM - Checkout repository where located Jenkinsfiles
+   -  Download Git Repository - Downloading needed repository where located .jmx file and data files(if exists). Also if data folder not empty will be added data files. Files without _nosplit in naming will be splitted through slave nodes equally
+   -  Start jmeter test - Starting jmeter test with selected parameters
+   -  Cleanup - Clean workspace folder on Jenkins pod
 
 ### stop_eck
 
 - Job that stopping elk stack
 - Parameters 
-       *  NAMESPACE (type - String, default - performance) - namespace where will be added new nodes
+   -  NAMESPACE (type - String, default - performance) - namespace where will be added new nodes
 - Stages
-       *  Declarative: Checkout SCM - Checkout repository where located Jenkinsfiles
-       *  Checkout git - Download needed repository
-       *  Cleanup - Clean workspace folder on Jenkins pod
+   -  Declarative: Checkout SCM - Checkout repository where located Jenkinsfiles
+   -  Checkout git - Download needed repository
+   -  Cleanup - Clean workspace folder on Jenkins pod
 
 ### stop_jmeter_cluster
 
 - Job for stopping jmeter cluster
 - Parameters 
-       *  NAMESPACE (type - String, default - performance) - namespace where will be deleting jmeter cluster
+   -  NAMESPACE (type - String, default - performance) - namespace where will be deleting jmeter cluster
 - Stages
-       *  Declarative: Checkout SCM - Checkout repository where located Jenkinsfiles
-       *  Download git repository - Download needed repository
-       *  Stoping jmeter nodes - Stopping master and slaves nodes
+   -  Declarative: Checkout SCM - Checkout repository where located Jenkinsfiles
+   -  Download git repository - Download needed repository
+   -  Stoping jmeter nodes - Stopping master and slaves nodes
 
 ### stop_jmeter_test
 
