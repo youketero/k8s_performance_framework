@@ -244,14 +244,12 @@ Add coverage by scripts
 
 </details>  
 
-<details>  
 
 <details>
+
 <summary>🤖 Jenkins Jobs Overview</summary>
 
----
-
-## 🧩 **deploy_eck**
+### 🧩 **deploy_eck**
 
 **Description:**  
 Deploys the ECK (Elastic Cloud on Kubernetes) stack — includes Elasticsearch, Kibana, Logstash, and Filebeat.
@@ -271,7 +269,7 @@ Deploys the ECK (Elastic Cloud on Kubernetes) stack — includes Elasticsearch, 
 
 ---
 
-## ⚙️ **deploy_jmeter_cluster**
+### ⚙️ **deploy_jmeter_cluster**
 
 **Description:**  
 Deploys a JMeter cluster with master and slave nodes.
@@ -290,7 +288,7 @@ Deploys a JMeter cluster with master and slave nodes.
 
 ---
 
-## ⚡ **deploy_stop_fastapp**
+### ⚡ **deploy_stop_fastapp**
 
 **Description:**  
 Deploys or removes the FastAPI demo application.
@@ -308,7 +306,7 @@ Deploys or removes the FastAPI demo application.
 
 ---
 
-## 🚀 **start_jmeter_test**
+### 🚀 **start_jmeter_test**
 
 **Description:**  
 Runs a JMeter test with given parameters and data files.
@@ -331,7 +329,7 @@ Runs a JMeter test with given parameters and data files.
 
 ---
 
-## 🛑 **stop_eck**
+### 🛑 **stop_eck**
 
 **Description:**  
 Stops and removes ECK stack components.
@@ -348,7 +346,7 @@ Stops and removes ECK stack components.
 
 ---
 
-## 🧹 **stop_jmeter_cluster**
+### 🧹 **stop_jmeter_cluster**
 
 **Description:**  
 Stops JMeter master and slave nodes.
@@ -365,7 +363,7 @@ Stops JMeter master and slave nodes.
 
 ---
 
-## ⏹️ **stop_jmeter_test**
+### ⏹️ **stop_jmeter_test**
 
 **Description:**  
 Stops an active JMeter test in the given namespace.
@@ -379,6 +377,5 @@ Stops an active JMeter test in the given namespace.
 1. **Checkout SCM**  
 2. **Stop JMeter test**
 
----
-
 </details>
+
