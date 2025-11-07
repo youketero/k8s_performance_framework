@@ -1,35 +1,10 @@
-🚀 k8s_performance_framework
+## 🚀 k8s_performance_framework
 
 A framework for automating deployment and performance testing in Kubernetes clusters using Jenkins, JMeter, Elastic Stack, and FastAPI.
 
 <details>
 
 <summary>⚡ Quick Start</summary>
-
-### Prerequisites  
-- Installed docker
-- Kubernetes cluster
-- On Windows installed WSL(Ubuntu latest for example). Also select in docker /settings/resourses/wsl integration/enable integration with selected linux distro
-
-### Steps  
-1. Clone repository	
-```
-git clone https://github.com/youketero/k8s_performance_framework.git && cd k8s_performance_framework
-```
-2. Run deploy_framework.sh file
-```
-./deploy_framework.sh
-```
-3. Navigate to Jenkins. **http://localhost:30080**  
-4. Choose **start_jmeter_test job**. 1 run will always fails. During 2 run with selected parameters   
-5. Open in browser Kibana address **http://localhost:32343** with credentials 📊  
-user: elastic. Code below hot to get password
-```
-kubectl get secret elasticsearch-es-elastic-user -n performance -o go-template='{{.data.elastic | base64decode}}'
-```
-6. Import objects that located in dashboards folder.   
-Navigate to Stack Management -> Saved objects -> Import  
-7. Open imported dashboard and check metrics  
 
 </details>
 
@@ -200,7 +175,7 @@ k8s_performance_framework/
 
 ### Quick setup using .sh scripts
 
-## Prerequisites  
+#### Prerequisites  
 - Installed docker
 - Kubernetes cluster
 - On Windows installed WSL(Ubuntu latest for example). Also select in docker /settings/resourses/wsl integration/enable integration with selected linux distro
@@ -236,11 +211,11 @@ chmod +x ./scripts/jmeter/start_jmeter_test.sh
 
 ### Quick setup using jenkins
 
-## Prerequisites  
+#### Prerequisites  
 - Installed docker
 - Kubernetes cluster
 
-### Steps  
+#### Steps  
 1) Clone repository	
 ```
 git clone https://github.com/youketero/k8s_performance_framework.git && cd k8s_performance_framework
