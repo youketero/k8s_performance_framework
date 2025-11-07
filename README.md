@@ -248,7 +248,8 @@ Add coverage by scripts
 
 <summary> 🤖 Jenkins jobs description </summary>
 
-### deploy_eck\  
+### deploy_eck
+
 - Description Job for deploying elk stack(elasticsearch, kibana, logstash, filebeat)
 - Parameters 
        *  NAMESPACE (type - String, default - performance) - namespace where will be added new nodes
@@ -260,7 +261,8 @@ Add coverage by scripts
        *  Cleanup old ECK operator - Deleting ECK operator and elk stack if exists
        *  Deploying ECK orkestrator - Deploying ECK orkestrator
 
-### deploy_jmeter_cluster\ 
+### deploy_jmeter_cluster
+
 - Job for deploying jmeter cluster(master and slave nodes)
 - Parameters 
        *  NAMESPACE (type - String, default - performance) - namespace where will be added new nodes
@@ -271,7 +273,8 @@ Add coverage by scripts
        *  Check replica number - Checking that replica numbers is not higher that 10(default value. Added to prevent too large values)
        *  Recreating jmeter deployment - Creating jmeter cluster with master and needed nodes
 
-### deploy_stop_fastapp\ 
+### deploy_stop_fastapp
+
 - Job for deploying and stoping fastapi app
 - Parameters 
        *  NAMESPACE (type - String, default - performance) - namespace where will be added new nodes
@@ -281,7 +284,8 @@ Add coverage by scripts
        *  Checkout git - Download needed repository
        *  Deploy/stop fastapp - Deploying or stopping fastapi application
 
-### start_jmeter_test\ 
+### start_jmeter_test
+
 - Job for starting jmeter test
 - Parameters 
        *  NAMESPACE (type - String, default - performance) - namespace where will be added new nodes
@@ -296,7 +300,8 @@ Add coverage by scripts
        *  Start jmeter test - Starting jmeter test with selected parameters
        *  Cleanup - Clean workspace folder on Jenkins pod
 
-### stop_eck\ 
+### stop_eck
+
 - Job that stopping elk stack
 - Parameters 
        *  NAMESPACE (type - String, default - performance) - namespace where will be added new nodes
@@ -305,7 +310,8 @@ Add coverage by scripts
        *  Checkout git - Download needed repository
        *  Cleanup - Clean workspace folder on Jenkins pod
 
-### stop_jmeter_cluster\ 
+### stop_jmeter_cluster
+
 - Job for stopping jmeter cluster
 - Parameters 
        *  NAMESPACE (type - String, default - performance) - namespace where will be deleting jmeter cluster
@@ -314,12 +320,13 @@ Add coverage by scripts
        *  Download git repository - Download needed repository
        *  Stoping jmeter nodes - Stopping master and slaves nodes
 
-### stop_jmeter_test\ 
+### stop_jmeter_test
+
 - Job for stopping jmeter test
 - Parameters 
-       *  NAMESPACE (type - String, default - performance) - namespace where will be deleting jmeter cluster
+       -  NAMESPACE (type - String, default - performance) - namespace where will be deleting jmeter cluster
 - Stages
-       *  Declarative: Checkout SCM - Checkout repository where located Jenkinsfiles
-       *  Stop Jmeter test - Stop jmeter test
-         
+       -  Declarative: Checkout SCM - Checkout repository where located Jenkinsfiles
+       -  Stop Jmeter test - Stop jmeter test
+
 </details>  
