@@ -324,9 +324,9 @@ Add coverage by scripts
 
 - Job for stopping jmeter test
 - Parameters 
-       -  NAMESPACE (type - String, default - performance) - namespace where will be deleting jmeter cluster
+   -  NAMESPACE (type - String, default - performance) - namespace where will be deleting jmeter cluster
 - Stages
-       -  Declarative: Checkout SCM - Checkout repository where located Jenkinsfiles
-       -  Stop Jmeter test - Stop jmeter test
+   -  Declarative: Checkout SCM - Checkout repository where located Jenkinsfiles
+   -  Stop Jmeter test - Stop jmeter test
 
 </details>  
