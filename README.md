@@ -219,6 +219,13 @@ docker tag jenkins_test:latest <your_docker_user>/jmeter:k8s
 docker push <your_docker_user>/jmeter:k8s
 ```
 
+How to run jmeter test using script file  
+
+```
+
+```
+
+
 </details>
 
 <details>  
@@ -231,10 +238,6 @@ docker push <your_docker_user>/jmeter:k8s
 
 <details>  
 
-</details>
-
-<details>  
-
 <summary> 🧩 Features </summary>  
 
 Add coverage by scripts 
@@ -244,35 +247,79 @@ Add coverage by scripts
 <details>  
 
 <summary> 🤖 Jenkins jobs description </summary>
-   
-| Name | Description | Parameters | Parameters type | Parameters description | Parameters defaults | Stages | Stages description |
-| :--- | :---------- | :--------  | :-------------  |:---------------------  |:------------------  |:-----  |:------------------ |
-| deploy_eck |	Job for deploying elk stack(elasticsearch, kibana, logstash, filebeat) | NAMESPACE | String | namespace where will be added new nodes | performance | Declarative: Checkout SCM | Checkout repository where located Jenkinsfiles |
-| | | | | | | Check kubectl | Check that k8s exists |
-| | | | | | | Checkout git  | Download needed repository |
-| | | | | | | Recreate namespace  | Recreating namespace is not exists |
-| | | | | | | Cleanup old ECK operator | Deleting ECK operator and elk stack if exists |
-| | | | | | | Deploying ECK orkestrator  | Deploying ECK orkestrator |
-| deploy_jmeter_cluster | Job for deploying jmeter cluster(master and slave nodes) | NAMESPACE | String | namespace where will be added new nodes | performance | Declarative: Checkout SCM | Checkout repository where located Jenkinsfiles |
-| | | SLAVESNUM | String | number of slavees that will be deployed | 3 | Checkout git | Download needed repository|
-| | | | | | | Check replica number | Checking that replica numbers is not higher that 10(default value. Added to prevent too large values) |
-| | | | | | | Recreating jmeter deployment | Creating jmeter cluster with master and needed nodes |
-| deploy_stop_fastapp | Job for deploying and stoping fastapi app | NAMESPACE | String | namespace where will be added new nodes | performance | Declarative: Checkout SCM | Checkout repository where located Jenkinsfiles |
-| | | ACTION | Boolean | deploy or delete fastapi application | apply(delete) | Checkout git | Download needed repository |
-| | | | | | | Deploy/stop fastapp | Deploying or stopping fastapi application |
-| start_jmeter_test | Job for starting jmeter test | NAMESPACE | String | namespace where will be added new nodes | performance | Declarative: Checkout SCM | Checkout repository where located Jenkinsfiles | 
-| | | JMX_FILE | String | Select .jmx file that need to be executed. Example path: \jmeter\scripts | Google_basic.jmx | Download Git Repository | Downloading needed repository where located .jmx file and data files(if exists). Also if data folder not empty will be added data files. Files without _nosplit in naming will be splitted through slave nodes equally |
-| | | THREADS | String | Select number of virtual threads. Selected number will be PER SLAVE node | 10 | Start jmeter test | Starting jmeter test with selected parameters |
-| | | RAMP_UP |	String | RAMP_UP | 10 | Cleanup | Clean workspace folder on Jenkins pod |
-| | | DURATION | String | Fill test duration in sec | 10 | | |
-| | | CUSTOM_PARAMETERS | String | Add custom parameter in format param:value separated by comma | TEST_DELAY:10 | | |		
-| stop_eck | Job that stopping elk stack | NAMESPACE | String | namespace where will be added new nodes | performance | Declarative: Checkout SCM | Checkout repository where located Jenkinsfiles | 
-| | | | | | | Checkout git | Download needed repository |
-| | | | | | | Cleanup | Clean workspace folder on Jenkins pod |       	
-| stop_jmeter_cluster | Job for stopping jmeter cluster | NAMESPACE | String | namespace where will be added new nodes | performance | Declarative: Checkout SCM | Checkout repository where located Jenkinsfiles |
-| | | | | | | Download git repository | Download needed repository |
-| | | | | | | Stoping jmeter nodes | Stopping master and slaves nodes |     
-| stop_jmeter_test | Job for stopping jmeter test | NAMESPACE | String | namespace where will be added new nodes | performance | Declarative: Checkout SCM | Checkout repository where located Jenkinsfiles |
-| | | | | | | Stop Jmeter test | Stop jmeter test |  
-  
+
+### deploy_eck\  
+- Description Job for deploying elk stack(elasticsearch, kibana, logstash, filebeat)
+- Parameters 
+       *  NAMESPACE (type - String, default - performance) - namespace where will be added new nodes
+- Stages
+       *  Declarative: Checkout SCM - Checkout repository where located Jenkinsfiles
+       *  Check kubectl - Check that k8s exists
+       *  Checkout git - Download needed repository
+       *  Recreate namespace - Recreating namespace is not exists
+       *  Cleanup old ECK operator - Deleting ECK operator and elk stack if exists
+       *  Deploying ECK orkestrator - Deploying ECK orkestrator
+
+### deploy_jmeter_cluster\ 
+- Job for deploying jmeter cluster(master and slave nodes)
+- Parameters 
+       *  NAMESPACE (type - String, default - performance) - namespace where will be added new nodes
+       *  SLAVESNUM (type - String, default - 3) - namespace where will be added new nodes
+- Stages
+       *  Declarative: Checkout SCM - Checkout repository where located Jenkinsfiles
+       *  Checkout git - Download needed repository
+       *  Check replica number - Checking that replica numbers is not higher that 10(default value. Added to prevent too large values)
+       *  Recreating jmeter deployment - Creating jmeter cluster with master and needed nodes
+
+### deploy_stop_fastapp\ 
+- Job for deploying and stoping fastapi app
+- Parameters 
+       *  NAMESPACE (type - String, default - performance) - namespace where will be added new nodes
+       *  ACTION (type - Boolean, default - apply(delete)) - deploy or delete fastapi application
+- Stages
+       *  Declarative: Checkout SCM - Checkout repository where located Jenkinsfiles
+       *  Checkout git - Download needed repository
+       *  Deploy/stop fastapp - Deploying or stopping fastapi application
+
+### start_jmeter_test\ 
+- Job for starting jmeter test
+- Parameters 
+       *  NAMESPACE (type - String, default - performance) - namespace where will be added new nodes
+       *  JMX_FILE (type - String, default - Google_basic.jmx) - Select .jmx file that need to be executed. Example path: \jmeter\scripts
+       *  THREADS (type - String, default - 10) - Select number of virtual threads. Selected number will be PER SLAVE node
+       *  RAMP_UP (type - String, default - 10) - ramping up time(time before load reached max threads num)
+       *  DURATION (type - String, default - 10) - test duration in sec 
+       *  CUSTOM_PARAMETERS (type - String, default - TEST_DELAY:10) - Add custom parameter in format param:value separated by comma
+- Stages
+       *  Declarative: Checkout SCM - Checkout repository where located Jenkinsfiles
+       *  Download Git Repository - Downloading needed repository where located .jmx file and data files(if exists). Also if data folder not empty will be added data files. Files without _nosplit in naming will be splitted through slave nodes equally
+       *  Start jmeter test - Starting jmeter test with selected parameters
+       *  Cleanup - Clean workspace folder on Jenkins pod
+
+### stop_eck\ 
+- Job that stopping elk stack
+- Parameters 
+       *  NAMESPACE (type - String, default - performance) - namespace where will be added new nodes
+- Stages
+       *  Declarative: Checkout SCM - Checkout repository where located Jenkinsfiles
+       *  Checkout git - Download needed repository
+       *  Cleanup - Clean workspace folder on Jenkins pod
+
+### stop_jmeter_cluster\ 
+- Job for stopping jmeter cluster
+- Parameters 
+       *  NAMESPACE (type - String, default - performance) - namespace where will be deleting jmeter cluster
+- Stages
+       *  Declarative: Checkout SCM - Checkout repository where located Jenkinsfiles
+       *  Download git repository - Download needed repository
+       *  Stoping jmeter nodes - Stopping master and slaves nodes
+
+### stop_jmeter_test\ 
+- Job for stopping jmeter test
+- Parameters 
+       *  NAMESPACE (type - String, default - performance) - namespace where will be deleting jmeter cluster
+- Stages
+       *  Declarative: Checkout SCM - Checkout repository where located Jenkinsfiles
+       *  Stop Jmeter test - Stop jmeter test
+         
 </details>  
