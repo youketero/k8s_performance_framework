@@ -39,35 +39,50 @@ Navigate to Stack Management -> Saved objects -> Import
   
 ```
 k8s_performance_framework/
+│   LICENSE
 │   README.md
 │
 ├───eck
-│   │   kustomization.yaml
-│   │
-│   ├───elasticsearch
-│   │       deployment.yaml
-│   │       sc.yaml
-│   │
-│   ├───filebeat
-│   │       ds.yaml
-│   │       fastapp-logs-pvc.yaml
-│   │       jmeter-logs-pvc.yaml
-│   │
-│   ├───kibana
-│   │   │   deployment.yaml
+│   ├───base
+│   │   │   kustomization.yaml
 │   │   │
-│   │   └───dashboards
-│   │           kibana_objects_jmeter.ndjson
+│   │   ├───elasticsearch
+│   │   │       deployment.yaml
+│   │   │       kustomization.yaml
+│   │   │       sc.yaml
+│   │   │
+│   │   ├───filebeat
+│   │   │       deployment.yaml
+│   │   │       kustomization.yaml
+│   │   │
+│   │   ├───kibana
+│   │   │   │   deployment.yaml
+│   │   │   │   kustomization.yaml
+│   │   │   │
+│   │   │   └───dashboards
+│   │   │           kibana_objects_jmeter.ndjson
+│   │   │           kibana_objects_jmeter_new.ndjson
+│   │   │
+│   │   ├───logstash
+│   │   │       deployment.yaml
+│   │   │       kustomization.yaml
+│   │   │
+│   │   └───metricbeat
+│   │           cr.yaml
+│   │           crb.yaml
+│   │           ds.yaml
+│   │           kustomization.yaml
+│   │           sa.yaml
 │   │
-│   ├───logstash
-│   │       deployment.yaml
-│   │
-│   └───metricbeat
-│           cr.yaml
-│           crb.yaml
-│           ds.yaml
-│           sa.yaml
-│
+│   └───overlays
+│       ├───jmeter
+│       │       fastapp-logs-pvc.yaml
+│       │       filebeat-patch.yaml
+│       │       jmeter-logs-pvc.yaml
+│       │       kustomization.yaml
+│       │       logstash-patch.yaml
+│       │
+│       └───k6
 ├───fast_api
 │   │   deployment.yaml
 │   │   Dockerfile
@@ -95,11 +110,13 @@ k8s_performance_framework/
 │   └───jobs
 │           deploy_eck.Jenkinsfile
 │           deploy_jmeter_cluster.Jenkinsfile
+│           deploy_k6_cluster.Jenkinsfile
 │           deploy_stop_fastapp.Jenkinsfile
 │           start_jmeter_test.Jenkinsfile
 │           stop_eck.Jenkinsfile
 │           stop_jmeter_cluster.Jenkinsfile
 │           stop_jmeter_test.Jenkinsfile
+│           stop_k6_cluster.Jenkinsfile
 │
 ├───jmeter
 │   │   Dockerfile
@@ -116,20 +133,43 @@ k8s_performance_framework/
 │               data.csv
 │               data_nosplit.csv
 │
+├───k6
+│       clean_pvc_job.yaml
+│       deployment.yaml
+│       Dockerfile
+│       kustomization.yaml
+│       pvc.yaml
+│       svc.yaml
+│       test.js
+│
 ├───namespaces
 │       performance_ns.yaml
 │
 └───scripts
-        deploy_eck.sh
-        deploy_fastapp.sh
-        deploy_framework_linux.sh
-        deploy_framework_win.sh
-        deploy_jenkins.sh
-        deploy_jmeter.sh
-        stop_eck.sh
-        stop_fastapp.sh
-        stop_jenkins.sh
-        stop_jmeter.sh
+    │   create_namespace.sh
+    │   deploy_framework.sh
+    │
+    ├───eck
+    │       deploy_eck.sh
+    │       stop_eck.sh
+    │
+    ├───fastapp
+    │       deploy_fastapp.sh
+    │       stop_fastapp.sh
+    │
+    ├───jenkins
+    │       deploy_jenkins.sh
+    │       stop_jenkins.sh
+    │
+    ├───jmeter
+    │       deploy_jmeter.sh
+    │       start_jmeter_test.sh
+    │       stop_jmeter.sh
+    │       stop_jmeter_test.sh
+    │
+    └───k6
+            deploy_k6.sh
+            stop_k6.sh
 ```
 
 </details>
