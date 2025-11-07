@@ -198,6 +198,33 @@ k8s_performance_framework/
 
 <summary>🏃 How to Run Tests</summary>
 
+###Quick setup using .sh scripts###
+
+1) Deploy framework(option for jmeter)
+
+```
+chmod +x ./scripts/deploy_framework.sh
+./scripts/deploy_framework.sh jmeter 
+``` 
+2) Start the test
+
+```
+chmod +x ./scripts/jmeter/start_jmeter_test.sh
+./scripts/jmeter/start_jmeter_test.sh
+``` 
+3) Navigate to kibana to check results
+
+   - Get elastic key(username elastic)
+   ```
+   kubectl get secret elasticsearch-es-elastic-user -n performance -o go-template='{{.data.elastic | base64decode}}'
+   ```
+   -  Import objects that located in dashboards folder. Navigate to Stack Management -> Saved objects -> Import
+   -  Open imported dashboard(Jmeter_dashboard) and check results
+     
+> [!NOTE]
+> Run from repository root folder
+
+
 </details>
 
 <details>  
