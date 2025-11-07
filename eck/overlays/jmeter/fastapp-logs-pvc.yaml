@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: fastapp-logs-pvc
-  namespace: performance
+  # namespace: performance
 spec:
   accessModes:
     - ReadWriteMany

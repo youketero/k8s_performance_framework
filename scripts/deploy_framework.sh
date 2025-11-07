@@ -1,4 +1,5 @@
 #--------------Creating namespace----------------
+LOAD_TOOL=${1:-jmeter} 
 echo "Creating namespace started"
 kubectl apply -f ./namespaces/performance_ns.yaml
 echo "✅ Namespace created"
@@ -11,8 +12,9 @@ echo "Deploying of ECK started"
 kubectl create -f https://download.elastic.co/downloads/eck/3.1.0/crds.yaml
 kubectl apply -f https://download.elastic.co/downloads/eck/3.1.0/operator.yaml
 kubectl get -n elastic-system pods
-kubectl apply -k ./eck
-echo "✅ ECK pod's is running"
+echo "Applying overlay for ${LOAD_TOOL}..."
+kubectl apply -k ./eck/overlays/${LOAD_TOOL}
+echo "✅ ECK components deployed for ${LOAD_TOOL}"
 #--------------Deploying jmeter cluster----------
 echo "Starting deploying of jmeter cluster" 
 kubectl apply -k ./jmeter

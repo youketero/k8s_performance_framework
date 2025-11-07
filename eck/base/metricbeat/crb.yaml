@@ -5,7 +5,7 @@ metadata:
 subjects:
 - kind: ServiceAccount
   name: metricbeat
-  namespace: performance
+  # namespace: performance
 roleRef:
   kind: ClusterRole
   name: metricbeat

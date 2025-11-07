@@ -9,6 +9,7 @@ A framework for automating deployment and performance testing in Kubernetes clus
 ### Prerequisites  
 - Installed docker
 - Kubernetes cluster
+- On Windows installed WSL(Ubuntu latest for example). Also select in docker /settings/resourses/wsl integration/enable integration with selected linux distro
 
 ### Steps  
 1. Clone repository	
@@ -168,8 +169,8 @@ Deploy service
 #Deploy ECK operator  
 kubectl create -f https://download.elastic.co/downloads/eck/3.1.0/crds.yaml  
 kubectl apply -f https://download.elastic.co/downloads/eck/3.1.0/operator.yaml  
-# Deploy elasticsearch service  
-kubectl apply -f elasticsearch.yaml  
+# Deploy elasticsearch service for jmeter setup
+kubectl apply -k ./eck/overlays/jmeter  
 # Other options: kibana, logstash, filebeat, metribeat, fastapp, jmeter_s, jmeter_m, jenkins  
 ``` 
 
@@ -177,18 +178,16 @@ Stop service
 
 ```
 #Stop ECK operator  
-kubectl delete -f https://download.elastic.co/downloads/eck/3.1.0/operator.yaml  
-kubectl delete -f https://download.elastic.co/downloads/eck/3.1.0/crds.yaml  
-kubectl delete ns elastic-system  
-kubectl delete crd elasticsearches.elasticsearch.k8s.elastic.co  
-kubectl delete crd kibanas.kibana.k8s.elastic.co  
-kubectl delete crd beats.beat.k8s.elastic.co  
-kubectl delete crd agents.agent.k8s.elastic.co  
-kubectl delete crd enterprisesearches.enterprisesearch.k8s.elastic.co  
-kubectl delete crd stackconfigpolicies.stackconfigpolicy.k8s.elastic.co  
-# Stop elasticsearch service  
-kubectl delete -f elasticsearch.yaml  
-# Other options: kibana, logstash, filebeat, metribeat, fastapp, jmeter_s, jmeter_m, jenkins  
+kubectl delete -f https://download.elastic.co/downloads/eck/3.1.0/operator.yaml
+kubectl delete -f https://download.elastic.co/downloads/eck/3.1.0/crds.yaml
+kubectl delete crd elasticsearches.elasticsearch.k8s.elastic.co --ignore-not-found=true
+kubectl delete crd kibanas.kibana.k8s.elastic.co --ignore-not-found=true
+kubectl delete crd beats.beat.k8s.elastic.co --ignore-not-found=true
+kubectl delete crd agents.agent.k8s.elastic.co --ignore-not-found=true
+kubectl delete crd enterprisesearches.enterprisesearch.k8s.elastic.co --ignore-not-found=true
+kubectl delete crd stackconfigpolicies.stackconfigpolicy.k8s.elastic.co --ignore-not-found=true
+kubectl delete -k ./eck
+# Other options: kibana, logstash, filebeat, metribeat, fastapp, jmeter, jenkins  
 ``` 
 
 Get Elasticsearh password(for kibana service)  
@@ -201,7 +200,7 @@ Run sh script
 
 ```
 # Run deploy framework script
-deploy_framework_linux.sh
+./scripts/deploy_framework.sh
 ```
 
 How to build own docker image for jenkins  

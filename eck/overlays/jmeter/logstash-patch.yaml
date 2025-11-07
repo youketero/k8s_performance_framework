@@ -2,17 +2,8 @@ apiVersion: logstash.k8s.elastic.co/v1alpha1
 kind: Logstash
 metadata:
   name: logstash
-  namespace: performance
-spec:
-  version: 8.13.4
-  count: 1
-  config:
-    log.level: info
-    api.http.host: "0.0.0.0"
-    queue.type: memory
-  elasticsearchRefs:
-    - clusterName: elasticsearch
-      name: elasticsearch
+  # namespace: performance
+spec:  
   pipelines:
   - pipeline.id: main
     config.string: |
@@ -83,13 +74,3 @@ spec:
         }
         stdout { codec => json }
       }
-  services:
-    - name: beats
-      service:
-        spec:
-          type: NodePort
-          ports:
-            - port: 5044
-              name: "filebeat"
-              protocol: TCP
-              targetPort: 5044
