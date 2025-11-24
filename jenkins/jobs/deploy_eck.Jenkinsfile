@@ -1,4 +1,4 @@
-properties([parameters([string(defaultValue: 'performance', description: 'Select namespace from which services will be deleted', name: 'NAMESPACE', trim: true), string(defaultValue: 'jmeter', description: 'Select load tool for which eck will be deployed', name: 'LOADTOOL', trim: true)])])
+properties([parameters([string(defaultValue: 'performance', description: 'Select namespace from which services will be deleted', name: 'NAMESPACE', trim: true), choice(choices: ['jmeter', 'k6'], description: 'Select load tool for which eck will be deployed', name: 'LOADTOOL')])])
 
 pipeline {
     agent any
