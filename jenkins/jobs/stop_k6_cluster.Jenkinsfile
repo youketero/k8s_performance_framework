@@ -11,7 +11,7 @@ pipeline {
         }
         stage('Stoping k6 nodes') {
             steps {
-                echo 'Stopping jmeter nodes'
+                echo 'Stopping k6 nodes'
                 sh "kubectl delete -k ./k6"
             }
         }

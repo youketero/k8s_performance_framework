@@ -1,4 +1,4 @@
-properties([parameters([string(defaultValue: 'performance', description: 'Select namespace from which services will be deleted', name: 'NAMESPACE', trim: true)])])
+properties([parameters([string(defaultValue: 'performance', description: 'Select namespace from which services will be deleted', name: 'NAMESPACE', trim: true), string(defaultValue: 'jmeter', description: 'Select load tool for which eck will be deployed', name: 'LOADTOOL', trim: true)])])
 
 pipeline {
     agent any
@@ -66,7 +66,7 @@ pipeline {
             steps {
                 script {
 					echo "Deploying elasticsearch"
-					sh "kubectl apply -k ./eck"
+                    sh "kubectl apply -k ./eck/overlays/${params.LOADTOOL}"
 					sleep 5
 					sh "kubectl wait --for=condition=ready pod -l elasticsearch.k8s.elastic.co/cluster-name=elasticsearch -n ${params.NAMESPACE} --timeout=180s"
 					echo "Deploying ended"

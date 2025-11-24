@@ -21,9 +21,9 @@ pipeline {
                 }
             }
         }
-        stage('Recreating k6 deployment') {
+        stage('Applying k6 deployment') {
             steps {
-                    echo 'Recreating pod set'
+                    echo 'Applying pod set'
                     sh """
                         kubectl delete -k ./k6 --ignore-not-found=true
                         kubectl apply -k ./k6
