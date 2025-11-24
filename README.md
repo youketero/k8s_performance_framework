@@ -321,9 +321,17 @@ docker push <your_docker_user>/jmeter:k8s
 How to run jmeter test using script file  
 
 ```
+#In root folder
 
+./scripts/jmeter/start_jmeter_test.sh --namespace performance --jmx ./jmeter/scripts/Google_basic.j
+mx --threads 10 --ramp-up 10 --duration 120 --custom "TEST_DELAY:10"
 ```
 
+How to stop jmeter test using script file  
+
+```
+./scripts/jmeter/stop_jmeter_test.sh 
+```
 
 </details>
 
