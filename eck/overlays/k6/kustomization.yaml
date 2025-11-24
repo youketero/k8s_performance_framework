@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: performance
 
 resources:
-  - k6-logs-pvc.yaml
+  - jmeter-logs-pvc.yaml
   - fastapp-logs-pvc.yaml
   - ../../base
 

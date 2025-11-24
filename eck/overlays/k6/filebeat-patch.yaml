@@ -1,0 +1,40 @@
+apiVersion: beat.k8s.elastic.co/v1beta1
+kind: Beat
+metadata:
+  name: filebeat
+spec:
+  config:
+    filebeat.inputs:
+      - type: log
+        enabled: true
+        paths:
+          - /k6/report*.csv  
+        fields: 
+          type: k6_log
+        fields_under_root: true
+      - type: log
+        enabled: true
+        paths:
+          - /fastapp_logs/*.log
+        fields:
+          type: fastapp
+        fields_under_root: true
+    output.logstash:
+      hosts: ["logstash-ls-beats:5044"]
+  daemonSet:
+    podTemplate:
+      spec:
+        containers:
+          - name: filebeat
+            volumeMounts:
+              - name: k6-storage
+                mountPath: /k6
+              - name: fastapp-logs-volume
+                mountPath: /fastapp_logs
+        volumes:
+          - name: k6-storage
+            persistentVolumeClaim:
+              claimName: k6-storage-pvc
+          - name: fastapp-logs-volume 
+            persistentVolumeClaim: 
+               claimName: fastapp-logs-pvc

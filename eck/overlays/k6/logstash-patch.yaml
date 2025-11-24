@@ -1,0 +1,76 @@
+apiVersion: logstash.k8s.elastic.co/v1alpha1
+kind: Logstash
+metadata:
+  name: logstash
+  # namespace: performance
+spec:  
+  pipelines:
+  - pipeline.id: main
+    config.string: |
+      input {
+        beats {
+          port => 5044
+          host => "0.0.0.0"
+        }
+      }
+      filter {
+        # JMeter CSV logs
+        if "jmeter_csv" in [type] {
+          csv {
+            separator => ","
+            skip_header => "true"
+            columns => ["timeStamp","elapsed","label","responseCode","responseMessage","threadName","dataType","success","failureMessage","bytes","sentBytes","grpThreads","allThreads","URL","Latency","IdleTime","Connect"]
+          }
+          mutate {
+            convert => {
+              "elapsed" => "integer"
+              "responseCode" => "integer"
+              "success" => "boolean"
+              "bytes" => "integer"
+              "sentBytes" => "integer"
+              "grpThreads" => "integer"
+              "allThreads" => "integer"
+              "Latency" => "integer"
+              "IdleTime" => "integer"
+              "Connect" => "integer"
+            }
+            add_field => { "[@metadata][target_index]" => "jmeter-csv" }
+          }
+          date {
+            match => ["timeStamp", "UNIX_MS"]
+            target => "@timestamp"
+          }
+        }
+        # JMeter .log
+        if "jmeter_log" in [type] {
+          grok {
+            match => { "message" => "%{TIMESTAMP_ISO8601:logtime} %{LOGLEVEL:level} %{GREEDYDATA:logmsg}" }
+          }
+          date {
+            match => ["logtime", "ISO8601"]
+            target => "@timestamp"
+          }
+          mutate { add_field => { "[@metadata][target_index]" => "jmeter-log" } }
+        }
+        # FastAPI logs (JSON format recommended)
+        if "fastapp" in [type] {
+          grok {
+            match => { "message" => "%{TIMESTAMP_ISO8601:timestamp} - %{LOGLEVEL:level} - %{GREEDYDATA:log_message}" }
+          }
+          mutate { add_field => { "[@metadata][target_index]" => "fastapp" } }
+        }
+        # Metricbeat
+        if [agent][type] == "metricbeat" {
+          mutate { add_field => { "[@metadata][target_index]" => "metricbeat-metrics" } }
+        }
+      }
+      output {
+        elasticsearch {
+          hosts => ["${ELASTICSEARCH_ES_HOSTS}"]
+          user => "${ELASTICSEARCH_ES_USER}"
+          password => "${ELASTICSEARCH_ES_PASSWORD}"
+          ssl_certificate_authorities => "${ELASTICSEARCH_ES_SSL_CERTIFICATE_AUTHORITY}"
+          index => "%{[type]}-%{+YYYY.MM.dd}"
+        }
+        stdout { codec => json }
+      }

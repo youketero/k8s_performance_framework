@@ -1,0 +1,12 @@
+#Volume for getting access to jmeter logs and results
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: k6-storage-pvc
+  # namespace: performance
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
