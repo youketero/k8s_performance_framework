@@ -285,7 +285,7 @@ kubectl delete crd beats.beat.k8s.elastic.co --ignore-not-found=true
 kubectl delete crd agents.agent.k8s.elastic.co --ignore-not-found=true
 kubectl delete crd enterprisesearches.enterprisesearch.k8s.elastic.co --ignore-not-found=true
 kubectl delete crd stackconfigpolicies.stackconfigpolicy.k8s.elastic.co --ignore-not-found=true
-kubectl delete -k ./eck
+kubectl delete -k ./eck/overlays/jmeter  
 # Other options: kibana, logstash, filebeat, metribeat, fastapp, jmeter, jenkins  
 ``` 
 
@@ -356,7 +356,8 @@ Deploys the ECK (Elastic Cloud on Kubernetes) stack — includes Elasticsearch, 
 **Parameters:**
 | Name | Type | Default | Description |
 |------|------|----------|-------------|
-| `NAMESPACE` | String | `performance` | Namespace where new nodes will be deployed |
+| `NAMESPACE` | String | `performance` | Namespace where new nodes will be deployed |\
+| `LOADTOOL` | Choice | `jmeter(k6)` | Select load tool for which eck will be deployed |
 
 **Stages:**
 1. **Checkout SCM** – Retrieve Jenkinsfile repository.  
@@ -437,6 +438,7 @@ Stops and removes ECK stack components.
 | Name | Type | Default | Description |
 |------|------|----------|-------------|
 | `NAMESPACE` | String | `performance` | Target namespace |
+| `LOADTOOL` | Choice | `jmeter(k6)` | Select load tool for which eck will be deployed |  
 
 **Stages:**
 1. **Checkout SCM**  
