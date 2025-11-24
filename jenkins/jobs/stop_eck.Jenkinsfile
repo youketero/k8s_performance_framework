@@ -1,4 +1,4 @@
-properties([parameters([string(defaultValue: 'performance', description: 'Select namespace from which services will be deleted', name: 'NAMESPACE', trim: true)])])
+properties([parameters([string(defaultValue: 'performance', description: 'Select namespace from which services will be deleted', name: 'NAMESPACE', trim: true), choice(choices: ['jmeter', 'k6'], description: 'Select load tool for which eck will be deployed', name: 'LOADTOOL')])])
 
 pipeline {
     agent any
@@ -24,7 +24,7 @@ pipeline {
 						kubectl delete crd stackconfigpolicies.stackconfigpolicy.k8s.elastic.co --ignore-not-found=true
 						'''
 						echo "ECK operator removed. Stopping pipeline gracefully..."
-                    sh "kubectl delete -k ./eck --ignore-not-found=true"
+                    sh "kubectl delete -k ./eck/overlays/${LOADTOOL}/ --ignore-not-found=true"
                 }
             }
         }
