@@ -24,7 +24,7 @@ pipeline {
                    echo "--------- Getting needed parameters ---------"
                    def masterPod = sh(script: """kubectl get pod -n ${params.NAMESPACE} -l jmeter_mode=master -o jsonpath="{.items[0].metadata.name}" """,returnStdout: true).trim()
                    def slavePods = sh(script: "kubectl get pod -n ${params.NAMESPACE} -l jmeter_mode=slave -o jsonpath='{range.items[*]}{.metadata.name} {end}'", returnStdout: true).trim().split(" ")
-                   def filePath= sh(script: "find /var/jenkins_home/workspace/start_jmeter_test -name ${JMX_FILE} | head -n 1", returnStdout: true).trim()
+                   def filePath= sh(script: "find ${env.WORKSPACE} -name ${JMX_FILE} | head -n 1", returnStdout: true).trim()
                    def jmeterDir = sh(script: """kubectl exec -n ${params.NAMESPACE} -c jmmaster ${masterPod} -- sh -c 'find /opt -maxdepth 1 -type d -name "apache-jmeter*" | head -n1' """,, returnStdout: true).trim() 
                    echo "--------- Copying ${filePath} into ${slavePods} ---------"
                    writeFile file: 'jmeter_injector_start.sh', text: """cd ${jmeterDir}
@@ -32,7 +32,7 @@ trap 'exit 0' SIGUSR1
 jmeter-server -Dserver.rmi.localport=50000 -Dserver_port=1099 -Jserver.rmi.ssl.disable=true >> jmeter-injector.out 2>> jmeter-injector.err &
 wait
 """
-                   def injPath = sh(script: "find /var/jenkins_home/workspace/start_jmeter_test -name jmeter_injector_start.sh | head -n 1", returnStdout: true).trim()
+                   def injPath = sh(script: "find ${env.WORKSPACE} -name jmeter_injector_start.sh | head -n 1", returnStdout: true).trim()
                    slavePods.each{  pod ->
                        sh """kubectl cp -c jmslave "${filePath}" -n "${params.NAMESPACE}" "${pod}:${jmeterDir}/bin/" """
                        sh """kubectl cp -c jmslave "${injPath}" -n "${params.NAMESPACE}" "${pod}:${jmeterDir}" """
@@ -49,7 +49,7 @@ jmeter -n -t ${jmeterDir}/bin/${params.JMX_FILE} -l /jmeter/report_${params.JMX_
 wait
 """                
                    uploadCsvToPods(slavePods, NAMESPACE, jmeterDir, slavePods.size())
-                   def loadTestPath = sh(script: "find /var/jenkins_home/workspace/start_jmeter_test -name load_test.sh | head -n 1", returnStdout: true).trim()
+                   def loadTestPath = sh(script: "find ${env.WORKSPACE} -name load_test.sh | head -n 1", returnStdout: true).trim()
                    sh """kubectl cp -c jmmaster "${loadTestPath}" -n ${params.NAMESPACE} ${masterPod}:${jmeterDir}/load_test.sh"""
                    sh """kubectl exec -c jmmaster -n ${params.NAMESPACE} ${masterPod} -- /bin/bash  "${jmeterDir}/load_test.sh" """
                 }
