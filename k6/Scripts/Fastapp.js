@@ -2,7 +2,7 @@ import { check, sleep } from 'k6';
 import http from 'k6/http';
 
 // ENVIRONENT VARIABLES AND CONST PARAMETERS 
-  const url = `http://${__ENV.HOSTNAME ?? fastapp}:${__ENV.PORT ?? 8000}`
+  const url = `http://${__ENV.HOST ?? fastapp}:${__ENV.PORT ?? 8000}`
   const PRODUCTS_NUM = Number(__ENV.PRODUCTS_NUM ?? 100)
   const PRODUCTS_PAGES_NUM = Number(__ENV.PRODUCTS_PAGES_NUM ?? 3)
   const USERS_NUM = Number(__ENV.USERS_NUM ?? 10)
