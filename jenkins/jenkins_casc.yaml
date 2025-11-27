@@ -31,6 +31,7 @@ jobs:
           [name: 'deploy_stop_fastapp', path: 'jenkins/jobs/deploy_stop_fastapp.Jenkinsfile'],
           [name: 'stop_k6_cluster', path: 'jenkins/jobs/stop_k6_cluster.Jenkinsfile'],
           [name: 'deploy_k6_cluster', path: 'jenkins/jobs/deploy_k6_cluster.Jenkinsfile']
+          [name: 'start_k6_test', path: 'jenkins/jobs/start_k6_test.Jenkinsfile']
       ]
       jobs.each { j ->
           pipelineJob(j.name) {
