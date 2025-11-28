@@ -15,5 +15,10 @@ pipeline {
                 sh "kubectl delete -k ./k6"
             }
         }
+        stage('Cleanup') {
+            steps {
+                cleanWs()
+            }
+        }
     }
 }

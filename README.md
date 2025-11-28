@@ -374,6 +374,7 @@ Deploys the ECK (Elastic Cloud on Kubernetes) stack — includes Elasticsearch, 
 4. **Recreate namespace** – Create or refresh namespace if missing.  
 5. **Cleanup old ECK operator** – Remove any existing ECK setup.  
 6. **Deploy ECK orchestrator** – Deploy Elasticsearch, Kibana, Logstash, Filebeat.
+7. **Cleanup workspace**
 
 ---
 
@@ -393,6 +394,7 @@ Deploys a JMeter cluster with master and slave nodes.
 2. **Checkout git**  
 3. **Check replica number**  
 4. **Recreate JMeter deployment**
+5. **Cleanup workspace**
 
 ---
 
@@ -411,6 +413,7 @@ Deploys or removes the FastAPI demo application.
 1. **Checkout SCM**  
 2. **Checkout git**  
 3. **Deploy/stop FastApp**
+4. **Cleanup workspace**
 
 ---
 
@@ -469,6 +472,7 @@ Stops JMeter master and slave nodes.
 1. **Checkout SCM**  
 2. **Checkout git**  
 3. **Stop JMeter nodes**
+4. **Cleanup workspace**
 
 ---
 
@@ -485,6 +489,100 @@ Stops an active JMeter test in the given namespace.
 **Stages:**
 1. **Checkout SCM**  
 2. **Stop JMeter test**
+3. **Cleanup workspace**
+
+---
+
+### 🧫 **deploy_k6_cluster**
+
+**Description:**  
+Job for deploying k6 cluster
+
+**Parameters:**
+| Name | Type | Default | Description |
+|------|------|----------|-------------|
+| `NAMESPACE` | String | `performance` | Namespace containing test pods |
+| `SLAVESNUM` | String | `3` | Number of JMeter slave nodes (max 10) |
+
+**Stages:**
+1. **Checkout SCM**  
+2. **Check replica number**
+3. **Applying k6 deployment**
+4. **Cleanup workspace**
+
+---
+
+### ⏹️ **stop_k6_cluster**
+
+**Description:**  
+Job for stop k6 cluster
+
+**Parameters:**
+| Name | Type | Default | Description |
+|------|------|----------|-------------|
+| `NAMESPACE` | String | `performance` | Namespace containing test pods |
+
+**Stages:**
+1. **Checkout SCM**  
+2. **Stoping k6 nodes**
+3. **Cleanup workspace**
+
+---
+
+### 🚀 **start_k6_test**
+
+**Description:**  
+Job for starting k6 test
+
+**Parameters:**
+| Name | Type | Default | Description |
+|------|------|----------|-------------|
+| `NAMESPACE` | String | `performance` | Namespace containing test pods |
+| `JMX_FILE` | String | `Fastapp.js` | Path to test file (e.g. `/scripts`) |
+| `THREADS` | String | `10` | Number of virtual users per slave |
+| `RAMP_UP` | String | `10` | Ramp-up time (sec) |
+| `DURATION` | String | `120` | Test duration (sec) |
+| `CUSTOM_PARAMETERS` | String | `TEST_DELAY:10` | Custom params (`param:value,param2:value2`) |
+
+**Stages:**
+1. **Checkout SCM**  
+2. **Download Git Repository**
+3. **Start k6 test**
+4. **Cleanup workspace**
+
+---
+
+### 🧹 **stop_k6_test**
+
+**Description:**  
+Job for stop k6 test
+
+**Parameters:**
+| Name | Type | Default | Description |
+|------|------|----------|-------------|
+| `NAMESPACE` | String | `performance` | Namespace containing test pods |
+
+**Stages:**
+1. **Checkout SCM**  
+2. **Stop k6 test**
+3. **Cleanup workspace**
+
+---
+
+### 🛑 **clean_pvc**
+
+**Description:**  
+Job for clean pvc
+
+**Parameters:**
+| Name | Type | Default | Description |
+|------|------|----------|-------------|
+| `NAMESPACE` | String | `performance` | Namespace containing test pods |
+| `PVC` | Active choice parameter | `jmeter,fastapp,k6` | Select choice for needed pvc which will be flushed |
+**Stages:**
+1. **Checkout SCM**  
+2. **Start clean PVC job**
+3. **Cleanup workspace**
 
 </details>
 

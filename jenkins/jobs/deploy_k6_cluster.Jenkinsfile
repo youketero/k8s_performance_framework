@@ -34,5 +34,10 @@ pipeline {
                     echo "✅ k6 cluster is up and running:"
             }
         }
+        stage('Cleanup') {
+            steps {
+                cleanWs()
+            }
+        }
     }
 }

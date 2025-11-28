@@ -14,5 +14,10 @@ pipeline {
                 sh "kubectl ${params.ACTION} -k ./fast_api"
             }
         }
+        stage('Cleanup') {
+            steps {
+                cleanWs()
+            }
+        }
     }
 }

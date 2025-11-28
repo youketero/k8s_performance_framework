@@ -27,5 +27,10 @@ pipeline {
                     sh "kubectl delete -k ./eck/overlays/${LOADTOOL}/ --ignore-not-found=true"
                 }
             }
+        stage('Cleanup') {
+            steps {
+                cleanWs()
+            }
+        }
         }
     }

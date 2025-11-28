@@ -36,5 +36,10 @@ pipeline {
                     echo "✅ Jmeter cluster is up and running:"
             }
         }
+        stage('Cleanup') {
+            steps {
+                cleanWs()
+            }
+        }
     }
 }

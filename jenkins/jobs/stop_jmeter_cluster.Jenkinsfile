@@ -15,5 +15,10 @@ pipeline {
                 sh "kubectl delete all -l jmeter_mode=slave -n ${params.NAMESPACE} --ignore-not-found=true && kubectl delete all -l jmeter_mode=master -n ${params.NAMESPACE} --ignore-not-found=true"
             }
         }
+        stage('Cleanup') {
+            steps {
+                cleanWs()
+            }
+        }
     }
 }
