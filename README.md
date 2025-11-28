@@ -579,6 +579,7 @@ Job for clean pvc
 |------|------|----------|-------------|
 | `NAMESPACE` | String | `performance` | Namespace containing test pods |
 | `PVC` | Active choice parameter | `jmeter,fastapp,k6` | Select choice for needed pvc which will be flushed |
+
 **Stages:**
 1. **Checkout SCM**  
 2. **Start clean PVC job**
