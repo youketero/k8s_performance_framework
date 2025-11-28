@@ -1,4 +1,4 @@
-properties([parameters([choice(choices: ['apply', 'delete'], description: 'Select action for fastapp application', name: 'ACTION')])])
+properties([parameters([choice(choices: ['apply', 'delete'], description: 'Select action for fastapp application', name: 'ACTION'), string(defaultValue: 'performance', description: 'Select namespace from which services will be deleted', name: 'NAMESPACE', trim: true)])])
 
 pipeline {
     agent any

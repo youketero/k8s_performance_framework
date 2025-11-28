@@ -31,3 +31,4 @@ workflow-aggregator
 ws-cleanup
 content-replace
 job-dsl
+uno-choice

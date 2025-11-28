@@ -39,7 +39,8 @@ jobs:
           [name: 'deploy_stop_fastapp', path: 'jenkins/jobs/deploy_stop_fastapp.Jenkinsfile', folder: 'fastapp'],
           [name: 'stop_k6_cluster', path: 'jenkins/jobs/stop_k6_cluster.Jenkinsfile', folder: 'k6'],
           [name: 'deploy_k6_cluster', path: 'jenkins/jobs/deploy_k6_cluster.Jenkinsfile', folder: 'k6'],
-          [name: 'start_k6_test', path: 'jenkins/jobs/start_k6_test.Jenkinsfile', folder: 'k6']
+          [name: 'start_k6_test', path: 'jenkins/jobs/start_k6_test.Jenkinsfile', folder: 'k6'],
+          [name: 'stop_k6_test', path: 'jenkins/jobs/stop_k6_test.Jenkinsfile', folder: 'k6'],
       ]
       jobs.each { j ->
           def job = j.folder + '/' + j.name

@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: clean-all-pvc
+  name: clean-k6-pvc
 spec:
   ttlSecondsAfterFinished: 60 
   template:
