@@ -23,7 +23,7 @@ jobs:
   - script: |
       def gitUrl = 'https://github.com/youketero/k8s_performance_framework.git'
       def gitBranch = 'main'
-      def folders = ['jmeter', 'k6', 'eck', 'fastapp']
+      def folders = ['jmeter', 'k6', 'eck', 'fastapp', 'utilities']
       folders.each { j ->
         folder(j) {
             description('Jobs for ${j}')
@@ -41,6 +41,7 @@ jobs:
           [name: 'deploy_k6_cluster', path: 'jenkins/jobs/deploy_k6_cluster.Jenkinsfile', folder: 'k6'],
           [name: 'start_k6_test', path: 'jenkins/jobs/start_k6_test.Jenkinsfile', folder: 'k6'],
           [name: 'stop_k6_test', path: 'jenkins/jobs/stop_k6_test.Jenkinsfile', folder: 'k6'],
+          [name: 'clean_pvc', path: 'jenkins/jobs/clean_pvc.Jenkinsfile', folder: 'utilities'],
       ]
       jobs.each { j ->
           def job = j.folder + '/' + j.name
