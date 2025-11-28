@@ -347,10 +347,15 @@ How to stop jmeter test using script file
 
 <summary> 🧩 Features </summary>  
 
-Add coverage by scripts 
+TBD 
 
 </details>  
 
+<summary> 📋 Scripts </summary>  
+
+Add coverage by scripts 
+
+</details>  
 
 <details>
 
