@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: clean-all-pvc
+spec:
+  ttlSecondsAfterFinished: 60 
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: cleaner
+        image: busybox
+        command:
+          - /bin/sh
+          - -c
+          - |
+            echo "Cleaning k6 pvc"
+            rm -rf /k6/*
+        volumeMounts:
+          - name: k6-storage
+            mountPath: /k6
+      volumes:
+        - name: k6-storage
+          persistentVolumeClaim:
+            claimName: k6-storage-pvc

@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: clean-all-pvc
+spec:
+  ttlSecondsAfterFinished: 60 
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: cleaner
+        image: busybox
+        command:
+          - /bin/sh
+          - -c
+          - |
+            echo "Cleaning fastapp pvc"
+            rm -rf /logs/*
+        volumeMounts:
+          - name: fastapp-logs-volume
+            mountPath: /logs
+      volumes:
+        - name: fastapp-logs-volume
+          persistentVolumeClaim:
+            claimName: fastapp-logs-pvc
