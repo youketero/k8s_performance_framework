@@ -28,7 +28,8 @@ pipeline {
                    def customParams = change_custom_parameter(params.CUSTOM_PARAMETERS)
                    pods.each{  pod ->
                        sh """kubectl cp -c k6 "${filePath}" -n "${params.NAMESPACE}" "${pod}:/scripts/" """
-                       sh """kubectl exec -c k6 -n "${params.NAMESPACE}" "${pod}" -- /bin/sh -c "k6 run /scripts/${TEST_FILE} ${customParams} --duration ${params.DURATION}s --vus ${params.THREADS} --out csv=/k6/report_${params.TEST_FILE}_\$(date +"%F_%H%M%S").csv > /tmp/k6.log 2>&1 & wait \$!" """
+                       sh """kubectl exec -c k6 -n "${params.NAMESPACE}" "${pod}" -- /bin/sh -c "k6 run /scripts/${TEST_FILE} ${customParams} --duration ${params.DURATION}s --vus ${params.THREADS} --out csv=/k6/report_${params.TEST_FILE}_\$(date +\"%F_%H%M%S\").csv > /tmp/k6.log 2>&1 & wait \$!" """
+
                    }
                 }
             }
