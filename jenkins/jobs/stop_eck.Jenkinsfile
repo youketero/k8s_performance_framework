@@ -2,7 +2,7 @@ properties([parameters([string(defaultValue: 'performance', description: 'Select
 
 pipeline {
     agent any
-	
+
     stages {
         stage('Checkout git') {
             steps {
@@ -10,7 +10,7 @@ pipeline {
                 git branch: 'main', url: 'https://github.com/youketero/k8s_performance_framework.git'
             }
         }
-        stage('Cleanup') {
+        stage('Clean') {
             steps {
 					echo "Deleting ECK operator and CRDs..."
 					sh '''
