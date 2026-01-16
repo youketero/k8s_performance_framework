@@ -11,7 +11,7 @@ A framework for automating deployment and performance testing in Kubernetes clus
 <details>
 
 <summary> 📂 Project Structure </summary>
-  
+
 ```
 k8s_performance_framework/
 │   LICENSE
@@ -152,9 +152,9 @@ k8s_performance_framework/
 <details>
 
 <summary>⚙️ Services</summary>
-  
+
 | Service       | Link                    | Description                                                                   |   
-| :------------ | :--------------------   | :---------------------------------------------------------------------------  | 
+| :------------ | :--------------------   | :---------------------------------------------------------------------------  |
 | Jenkins       | http://localhost:30080  | Service for automation of cluster process and test runs                       |
 | Kibana        | http://localhost:32343  | Service for monitoring cluster metrics and test results                       |
 | Fastapp       | http://localhost:30000  | Testing wrote using FastAPI service for load tests                            |
@@ -261,7 +261,7 @@ Open in browser: [http://localhost:32343](http://localhost:32343)
 
 <details>  
 <summary>📝 Example of commands</summary>
-   
+
 Deploy service  
 
 ```
@@ -271,7 +271,7 @@ kubectl apply -f https://download.elastic.co/downloads/eck/3.1.0/operator.yaml
 # Deploy elasticsearch service for jmeter setup
 kubectl apply -k ./eck/overlays/jmeter  
 # Other options: kibana, logstash, filebeat, metribeat, fastapp, jmeter_s, jmeter_m, jenkins  
-``` 
+```
 
 Stop service  
 
@@ -287,7 +287,7 @@ kubectl delete crd enterprisesearches.enterprisesearch.k8s.elastic.co --ignore-n
 kubectl delete crd stackconfigpolicies.stackconfigpolicy.k8s.elastic.co --ignore-not-found=true
 kubectl delete -k ./eck/overlays/jmeter  
 # Other options: kibana, logstash, filebeat, metribeat, fastapp, jmeter, jenkins  
-``` 
+```
 
 Get Elasticsearh password(for kibana service)  
 
@@ -330,7 +330,7 @@ mx --threads 10 --ramp-up 10 --duration 120 --custom "TEST_DELAY:10"
 How to stop jmeter test using script file  
 
 ```
-./scripts/jmeter/stop_jmeter_test.sh 
+./scripts/jmeter/stop_jmeter_test.sh
 ```
 
 </details>
@@ -347,15 +347,18 @@ How to stop jmeter test using script file
 
 <summary> 🧩 Features </summary>  
 
-TBD 
+TBD
 
 </details>  
+
+<details> 
 
 <summary> 📋 Scripts </summary>  
 
-Add coverage by scripts 
+Add coverage by scripts
 
 </details>  
+
 
 <details>
 
@@ -591,4 +594,3 @@ Job for clean pvc
 3. **Cleanup workspace**
 
 </details>
-
