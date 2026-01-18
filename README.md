@@ -351,11 +351,28 @@ TBD
 
 </details>  
 
-<details> 
+<details>
 
 <summary> 📋 Scripts </summary>  
 
 Add coverage by scripts
+
+#### eck/deploy_eck.sh
+#### eck/stop_eck.sh
+#### fastapp/deploy_fastapp.sh
+#### fastapp/stop_fastapp.sh
+#### jenkins/deploy_jenkins.sh
+#### jenkins/stop_jenkins.sh
+#### jmeter/deploy_jmeter.sh
+#### jmeter/start_jmeter_test.sh
+#### jmeter/stop_jmeter_test.sh
+#### jmeter/stop_jmeter.sh
+#### k6/deploy_k6.sh
+#### k6/stop_k6.sh
+#### utilities/clean_pvc.sh
+#### create_namespace.sh
+#### deploy_framework.sh
+
 
 </details>  
 
