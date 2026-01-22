@@ -355,7 +355,7 @@ TBD
 
 <summary> 📋 Scripts </summary>  
 
-#### eck/deploy_eck.sh
+#### ❯❯❯ eck/deploy_eck.sh
 
 **Description:**  
 Deploys the ECK (Elastic Cloud on Kubernetes) stack — includes Elasticsearch, Kibana, Logstash, and Filebeat.
@@ -364,24 +364,42 @@ Deploys the ECK (Elastic Cloud on Kubernetes) stack — includes Elasticsearch, 
 
 NONE
 
-**Jenkins job analog**
+**Jenkins job analog:**
 
 deploy_eck
 
-**Example of command**
+**Example of command:**
 
 ```bash
 chmod +x ./scripts/deploy_eck.sh
-./scripts/deploy_eck.sh
+./scripts/eck/deploy_eck.sh
 ```
 
 ---
 
-#### eck/stop_eck.sh
+#### ❯❯❯ eck/stop_eck.sh
+
+**Description:**  
+Stop the ECK (Elastic Cloud on Kubernetes) stack(deleting ECK and other services)
+
+**Parameters:**
+
+NONE
+
+**Jenkins job analog:**
+
+stop_eck
+
+**Example of command:**
+
+```bash
+chmod +x ./scripts/stop_eck.sh
+./scripts/eck/stop_eck.sh
+```
 
 ---
 
-#### fastapp/deploy_fastapp.sh
+#### ❯❯❯ fastapp/deploy_fastapp.sh
 
 ---
 
