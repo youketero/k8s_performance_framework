@@ -197,7 +197,7 @@ chmod +x ./scripts/deploy_framework.sh
 #### 🧩 Step 3. Start the Test
 ```bash
 chmod +x ./scripts/jmeter/start_jmeter_test.sh
-./scripts/start_jmeter_test.sh --namespace performance --jmx Google_basic.jmx --threads 10 --ramp-up 10 --duration 120 --custom "TEST_DELAY:10"
+./scripts/jmeter/start_jmeter_test.sh --namespace performance --jmx Google_basic.jmx --threads 10 --ramp-up 10 --duration 120 --custom "TEST_DELAY:10"
 ```
 
 #### 📊 Step 4. Open Kibana to View Results
@@ -355,7 +355,7 @@ TBD
 
 <summary> 📋 Scripts </summary>  
 
-#### ❯❯❯ eck/deploy_eck.sh
+#### ❯ eck/deploy_eck.sh
 
 **Description:**  
 Deploys the ECK (Elastic Cloud on Kubernetes) stack — includes Elasticsearch, Kibana, Logstash, and Filebeat.
@@ -371,13 +371,13 @@ deploy_eck
 **Example of command:**
 
 ```bash
-chmod +x ./scripts/deploy_eck.sh
+chmod +x ./scripts/eck/deploy_eck.sh
 ./scripts/eck/deploy_eck.sh
 ```
 
 ---
 
-#### ❯❯❯ eck/stop_eck.sh
+#### ❯ eck/stop_eck.sh
 
 **Description:**  
 Stop the ECK (Elastic Cloud on Kubernetes) stack(deleting ECK and other services)
@@ -393,61 +393,317 @@ stop_eck
 **Example of command:**
 
 ```bash
-chmod +x ./scripts/stop_eck.sh
+chmod +x ./scripts/eck/stop_eck.sh
 ./scripts/eck/stop_eck.sh
 ```
 
 ---
 
-#### ❯❯❯ fastapp/deploy_fastapp.sh
+#### ❯ fastapp/deploy_fastapp.sh
+
+**Description:**  
+Deploys the FastAPI demo application.
+
+**Parameters:**
+
+NONE
+
+**Jenkins job analog:**
+
+deploy_stop_fastapp
+
+**Example of command:**
+
+```bash
+chmod +x ./scripts/fastapp/deploy_fastapp.sh
+./scripts/fastapp/deploy_fastapp.sh
+```
 
 ---
 
-#### fastapp/stop_fastapp.sh
+#### ❯ fastapp/stop_fastapp.sh
+
+**Description:**  
+Stop the FastAPI demo application.
+
+**Parameters:**
+
+NONE
+
+**Jenkins job analog:**
+
+deploy_stop_fastapp
+
+**Example of command:**
+
+```bash
+chmod +x ./scripts/fastapp/stop_fastapp.sh
+./scripts/fastapp/stop_fastapp.sh
+```
 
 ---
 
-#### jenkins/deploy_jenkins.sh
+#### ❯ jenkins/deploy_jenkins.sh
+
+**Description:**  
+Deploying Jenkins application(based on predefined docker image)
+
+**Parameters:**
+
+NONE
+
+**Jenkins job analog:**
+
+NONE
+
+**Example of command:**
+
+```bash
+chmod +x ./scripts/jenkins/deploy_jenkins.sh
+./scripts/jenkins/deploy_jenkins.sh
+```
 
 ---
 
-#### jenkins/stop_jenkins.sh
+#### ❯ jenkins/stop_jenkins.sh
+
+**Description:**  
+Deleting Jenkins application
+
+**Parameters:**
+
+NONE
+
+**Jenkins job analog:**
+
+NONE
+
+**Example of command:**
+
+```bash
+chmod +x ./scripts/jenkins/stop_jenkins.sh
+./scripts/jenkins/stop_jenkins.sh
+```
 
 ---
 
-#### jmeter/deploy_jmeter.sh
+#### ❯ jmeter/deploy_jmeter.sh
+
+**Description:**  
+Deploying of jmeter cluster(number of jmeter slave nodes can be changed in slave.yaml file)
+
+**Parameters:**
+
+NONE
+
+**Jenkins job analog:**
+
+NONE
+
+**Example of command:**
+
+```bash
+chmod +x ./scripts/jmeter/deploy_jmeter.sh
+./scripts/jmeter/deploy_jmeter.sh
+```
 
 ---
 
-#### jmeter/start_jmeter_test.sh
+#### ❯ jmeter/start_jmeter_test.sh
+
+**Description:**  
+Starting jmeter test with defined parameters
+
+**Parameters:**
+
+| Name | Type | Default | Description |
+|------|------|----------|-------------|
+| `namespace` | String | `performance` | Target namespace |
+| `jmx` | String | `Google_basic.jmx` | Path to test file (e.g. `jmeter/scripts`) |
+| `threads` | String | `10` | Number of virtual users per slave |
+| `ramp-up` | String | `10` | Ramp-up time (sec) |
+| `duration` | String | `10` | Test duration (sec) |
+| `custom` | String | `TEST_DELAY:10` | Custom params (`param:value,param2:value2`) |
+
+**Jenkins job analog:**
+
+start_jmeter_test
+
+**Example of command:**
+
+```bash
+chmod +x ./scripts/jmeter/start_jmeter_test.sh
+./scripts/jmeter/start_jmeter_test.sh --namespace performance --jmx Google_basic.jmx --threads 10 --ramp-up 10 --duration 120 --custom "TEST_DELAY:10"
+```
 
 ---
 
-#### jmeter/stop_jmeter_test.sh
+#### ❯ jmeter/stop_jmeter_test.sh
+
+**Description:**  
+Stoping jmeter test
+
+**Parameters:**
+
+NONE
+
+**Jenkins job analog:**
+
+stop_jmeter_test
+
+**Example of command:**
+
+```bash
+chmod +x ./scripts/jmeter/stop_jmeter_test.sh
+./scripts/jmeter/stop_jmeter_test.sh
+```
 
 ---
 
-#### jmeter/stop_jmeter.sh
+#### ❯ jmeter/stop_jmeter.sh
+
+
+**Description:**  
+Stoping jmeter cluster(master and slave nodes)
+
+**Parameters:**
+
+NONE
+
+**Jenkins job analog:**
+
+stop_jmeter_cluster
+
+**Example of command:**
+
+```bash
+chmod +x ./scripts/jmeter/stop_jmeter.sh
+./scripts/jmeter/stop_jmeter.sh
+```
 
 ---
 
-#### k6/deploy_k6.sh
+#### ❯ k6/deploy_k6.sh
+
+**Description:**  
+Deploying k6 cluster
+
+**Parameters:**
+
+NONE
+
+**Jenkins job analog:**
+
+deploy_k6_cluster
+
+**Example of command:**
+
+```bash
+chmod +x ./scripts/k6/deploy_k6.sh
+./scripts/k6/deploy_k6.sh
+```
 
 ---
 
-#### k6/stop_k6.sh
+#### ❯ k6/stop_k6.sh
+
+**Description:**  
+Stopping k6 cluster
+
+**Parameters:**
+
+NONE
+
+**Jenkins job analog:**
+
+stop_k6_cluster
+
+**Example of command:**
+
+```bash
+chmod +x ./scripts/k6/stop_k6.sh
+./scripts/k6/stop_k6.sh
+```
 
 ---
 
-#### utilities/clean_pvc.sh  
+#### ❯ utilities/clean_pvc.sh  
+
+**Description:**  
+Script for clearning selected pvc
+
+**Parameters:**
+
+Sent as a list pvc that need to be cleaned
+Options: fastapp, jmeter, k6
+
+**Jenkins job analog:**
+
+clean_pvc
+
+**Example of command:**
+
+```bash
+chmod +x ./scripts/utils/clean_pvc.sh
+# run with 1 selection
+./scripts/utils/clean_pvc.sh fastapp
+# run with 2 selections
+./scripts/utils/clean_pvc.sh fastapp jmeter
+```
 
 ---  
 
-#### create_namespace.sh
+#### ❯ create_namespace.sh
+
+**Description:**  
+Creating namespace(by default in .yaml file - `performance`)
+
+**Parameters:**
+
+NONE
+
+**Jenkins job analog:**
+
+NONE
+
+**Example of command:**
+
+```bash
+chmod +x ./scripts/create_namespace.sh
+./scripts/create_namespace.sh
+
+```
 
 ---  
 
-#### deploy_framework.sh
+#### ❯ deploy_framework.sh
+
+**Description:**  
+Deploying applications for framework consisted of:
+1) Eck(as visualization)
+2) Load application(LOADTOOL parameter)
+3) Test application
+4) CI/CD(Jenkins with predefined jobs)
+
+**Parameters:**
+
+| Name | Type | Default | Description |
+|------|------|----------|-------------|
+| `LOADTOOL` | String | `jmeter(k6)` | Select load tool for which framework applications will be deployed |
+
+**Jenkins job analog:**
+
+NONE
+
+**Example of command:**
+
+```bash
+chmod +x ./scripts/deploy_framework.sh
+# option for jmeter as load tool
+./scripts/deploy_framework.sh jmeter
+# option for k6 as load tool
+./scripts/deploy_framework.sh k6
+```
 
 ---
 
