@@ -355,23 +355,83 @@ TBD
 
 <summary> 📋 Scripts </summary>  
 
-Add coverage by scripts
-
 #### eck/deploy_eck.sh
+
+**Description:**  
+Deploys the ECK (Elastic Cloud on Kubernetes) stack — includes Elasticsearch, Kibana, Logstash, and Filebeat.
+
+**Parameters:**
+
+NONE
+
+**Jenkins job analog**
+
+deploy_eck
+
+**Example of command**
+
+```bash
+chmod +x ./scripts/deploy_eck.sh
+./scripts/deploy_eck.sh
+```
+
+---
+
 #### eck/stop_eck.sh
+
+---
+
 #### fastapp/deploy_fastapp.sh
+
+---
+
 #### fastapp/stop_fastapp.sh
+
+---
+
 #### jenkins/deploy_jenkins.sh
+
+---
+
 #### jenkins/stop_jenkins.sh
+
+---
+
 #### jmeter/deploy_jmeter.sh
+
+---
+
 #### jmeter/start_jmeter_test.sh
+
+---
+
 #### jmeter/stop_jmeter_test.sh
+
+---
+
 #### jmeter/stop_jmeter.sh
+
+---
+
 #### k6/deploy_k6.sh
+
+---
+
 #### k6/stop_k6.sh
-#### utilities/clean_pvc.sh
+
+---
+
+#### utilities/clean_pvc.sh  
+
+---  
+
 #### create_namespace.sh
+
+---  
+
 #### deploy_framework.sh
+
+---
 
 
 </details>  
@@ -381,7 +441,7 @@ Add coverage by scripts
 
 <summary>🤖 Jenkins Jobs Overview</summary>
 
-### 🧩 **deploy_eck**
+#### 🧩 **deploy_eck**
 
 **Description:**  
 Deploys the ECK (Elastic Cloud on Kubernetes) stack — includes Elasticsearch, Kibana, Logstash, and Filebeat.
@@ -403,7 +463,7 @@ Deploys the ECK (Elastic Cloud on Kubernetes) stack — includes Elasticsearch, 
 
 ---
 
-### ⚙️ **deploy_jmeter_cluster**
+#### ⚙️ **deploy_jmeter_cluster**
 
 **Description:**  
 Deploys a JMeter cluster with master and slave nodes.
@@ -423,7 +483,7 @@ Deploys a JMeter cluster with master and slave nodes.
 
 ---
 
-### ⚡ **deploy_stop_fastapp**
+#### ⚡ **deploy_stop_fastapp**
 
 **Description:**  
 Deploys or removes the FastAPI demo application.
@@ -442,7 +502,7 @@ Deploys or removes the FastAPI demo application.
 
 ---
 
-### 🚀 **start_jmeter_test**
+#### 🚀 **start_jmeter_test**
 
 **Description:**  
 Runs a JMeter test with given parameters and data files.
@@ -465,7 +525,7 @@ Runs a JMeter test with given parameters and data files.
 
 ---
 
-### 🛑 **stop_eck**
+#### 🛑 **stop_eck**
 
 **Description:**  
 Stops and removes ECK stack components.
@@ -483,7 +543,7 @@ Stops and removes ECK stack components.
 
 ---
 
-### 🧹 **stop_jmeter_cluster**
+#### 🧹 **stop_jmeter_cluster**
 
 **Description:**  
 Stops JMeter master and slave nodes.
@@ -501,7 +561,7 @@ Stops JMeter master and slave nodes.
 
 ---
 
-### ⏹️ **stop_jmeter_test**
+#### ⏹️ **stop_jmeter_test**
 
 **Description:**  
 Stops an active JMeter test in the given namespace.
@@ -518,7 +578,7 @@ Stops an active JMeter test in the given namespace.
 
 ---
 
-### 🧫 **deploy_k6_cluster**
+#### 🧫 **deploy_k6_cluster**
 
 **Description:**  
 Job for deploying k6 cluster
@@ -537,7 +597,7 @@ Job for deploying k6 cluster
 
 ---
 
-### ⏹️ **stop_k6_cluster**
+#### ⏹️ **stop_k6_cluster**
 
 **Description:**  
 Job for stop k6 cluster
@@ -554,7 +614,7 @@ Job for stop k6 cluster
 
 ---
 
-### 🚀 **start_k6_test**
+#### 🚀 **start_k6_test**
 
 **Description:**  
 Job for starting k6 test
@@ -577,7 +637,7 @@ Job for starting k6 test
 
 ---
 
-### 🧹 **stop_k6_test**
+#### 🧹 **stop_k6_test**
 
 **Description:**  
 Job for stop k6 test
@@ -594,7 +654,7 @@ Job for stop k6 test
 
 ---
 
-### 🛑 **clean_pvc**
+#### 🛑 **clean_pvc**
 
 **Description:**  
 Job for clean pvc
